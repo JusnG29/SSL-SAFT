@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+}
+
+ext {
+    quarkusVersion='2.10.1.Final'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation ("io.quarkus:quarkus-container-image-jib:${quarkusVersion}")
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation ("io.quarkus:quarkus-resteasy-reactive-jsonb:${quarkusVersion}")
+    implementation ("io.quarkus:quarkus-smallrye-openapi:${quarkusVersion}")
+    implementation ("io.quarkus:quarkus-resteasy-reactive:${quarkusVersion}")
+    implementation ("io.quarkus:quarkus-hibernate-orm-panache:${quarkusVersion}")
+    implementation ("io.quarkus:quarkus-jdbc-postgresql:${quarkusVersion}")
+    implementation ("io.quarkus:quarkus-arc:${quarkusVersion}")
+    testImplementation ("io.quarkus:quarkus-junit5:${quarkusVersion}")
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+group 'net.sternstein.saft'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
