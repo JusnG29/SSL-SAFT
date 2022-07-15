@@ -17,7 +17,6 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name="productId", nullable=false)
     private Product product;
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate purchaseDate;
     private BigDecimal value;
     private int amount;
