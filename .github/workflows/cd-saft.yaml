@@ -23,9 +23,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
       - name: Build and push docker image
         working-directory: ./src/saft
         run: ./gradlew build "-Dquarkus.profile=cd"
