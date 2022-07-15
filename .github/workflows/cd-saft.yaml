@@ -2,9 +2,12 @@ name: Build and deploy SAFT
 
 on:
   push:
-    branches: "*"
+    branches:
+      - main
+      - MD/feature/cd-pipeline
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
