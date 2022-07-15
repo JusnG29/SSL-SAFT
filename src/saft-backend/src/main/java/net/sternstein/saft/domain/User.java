@@ -1,22 +1,27 @@
 package net.sternstein.saft.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 public class User {
     @Id
     private UUID id;
+    @Column(length = 4)
     private String passcode;
+    @Column(length = 50)
     private String couleurName;
-    private int balance;
+    private BigDecimal balance;
 
     public User() {}
 
     public User(String passcode, String couleurName) {
         id = UUID.randomUUID();
-        balance = 0;
+        balance = BigDecimal.ZERO;
         this.passcode = passcode;
         this.couleurName = couleurName;
     }
@@ -45,11 +50,11 @@ public class User {
         this.couleurName = couleurName;
     }
 
-    public int getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -57,21 +62,12 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         User user = (User) o;
-
-        if (balance != user.balance) return false;
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (!passcode.equals(user.passcode)) return false;
-        return couleurName.equals(user.couleurName);
+        return Objects.equals(id, user.id) && Objects.equals(passcode, user.passcode) && Objects.equals(couleurName, user.couleurName) && Objects.equals(balance, user.balance);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + passcode.hashCode();
-        result = 31 * result + couleurName.hashCode();
-        result = 31 * result + balance;
-        return result;
+        return Objects.hash(id, passcode, couleurName, balance);
     }
 }
