@@ -12,6 +12,10 @@ repositories {
     mavenLocal()
 }
 
+tasks.register("build-and-push-image") {
+
+}
+
 dependencies {
     implementation ("io.quarkus:quarkus-container-image-jib:${quarkusVersion}")
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
