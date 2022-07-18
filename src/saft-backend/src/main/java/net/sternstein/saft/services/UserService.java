@@ -6,4 +6,6 @@ import java.util.List;
 public interface UserService {
     User createUser(String passcode, String couleurName);
     List<User> getAllUsers();
+    void updateUser();
+    void deleteUser();
 }
