@@ -1,4 +1,4 @@
-package net.sternstein.saft.models.dtos;
+package net.sternstein.saft.model.dto;
 
 public record CreateUserRequest(String couleurName, String passcode) {
 }

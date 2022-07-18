@@ -1,9 +1,8 @@
 package net.sternstein.saft.api;
 
-import net.sternstein.saft.models.dtos.CreateUserRequest;
-import net.sternstein.saft.services.UserService;
+import net.sternstein.saft.model.dto.CreateUserRequest;
+import net.sternstein.saft.service.UserService;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
