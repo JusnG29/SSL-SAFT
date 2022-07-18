@@ -25,4 +25,14 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll().stream().toList();
     }
+
+    @Override
+    public void updateUser() {
+
+    }
+
+    @Override
+    public void deleteUser() {
+
+    }
 }
