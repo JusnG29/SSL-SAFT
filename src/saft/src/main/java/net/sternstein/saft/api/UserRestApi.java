@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 @Path("user")
 @Consumes("application/json")
 @Produces("application/json")
-public class SaftRestApi implements SaftApi {
+public class UserRestApi implements UserApi {
     @Inject
     UserService userService;
 
