@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "SaftUser")
 public class User {
     @Id
     private UUID id;
