@@ -34,13 +34,12 @@ jobs:
         run: ./gradlew build "-Dquarkus.profile=cd"
 
       - name: Pull image and start container on remote
-        uses: appleboy/ssh-action@master
+        uses: fifsky/ssh-action@master
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USERNAME }}
-          key: ${{ secrets.REMOTE_KEY }}
-          port: ${{ secrets.REMOTE_PORT }}
-          script: |
+          command: |
             cd ~/saft-home/SSL-SAFT-Infrastructure/remote/saft-backend
             docker compose pull
             docker compose up -d
+          host: ${{ secrets.REMOTE_HOST }}
+          user: ${{ secrets.REMOTE_USERNAME }}
+          key: ${{ secrets.REMOTE_KEY }}
