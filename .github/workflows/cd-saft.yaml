@@ -38,8 +38,8 @@ jobs:
         with:
           command: |
             cd ~/saft-home/SSL-SAFT-Infrastructure/remote/saft-backend
-            docker compose pull
-            docker compose up -d
+            sudo docker compose pull
+            sudo docker compose up -d
           host: ${{ secrets.REMOTE_HOST }}
           user: ${{ secrets.REMOTE_USERNAME }}
           key: ${{ secrets.REMOTE_KEY }}
