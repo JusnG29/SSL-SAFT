@@ -22,7 +22,7 @@ export class UserService {
   public login(couleurName: string, passCode: string): Observable<User> {
     if (
       couleurName === this.getTestUser().couleurName &&
-      passCode === this.getTestUser().couleurName
+      passCode === this.getTestUser().passCode
     ) {
       return of(this.getTestUser());
     }
