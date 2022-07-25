@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
+      import('./post-login/post-login.module').then((m) => m.PostLoginModule),
   },
   {
     path: '*',
