@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "saft-personal-ui",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
