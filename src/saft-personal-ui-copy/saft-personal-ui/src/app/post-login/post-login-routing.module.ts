@@ -1,19 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BuyPageComponent } from './buy-page/buy-page.component';
-import { HistoryPageComponent } from './history-page/history-page.component';
-import { PostLoginPageComponent } from './post-login-page/post-login-page.component';
+import { PostLoginPage } from './post-login.page';
 
 const routes: Routes = [
-  {path: "", component: PostLoginPageComponent, children: [
-    {path:"", redirectTo: "buy", pathMatch: "full"},
-    {path: "buy", component: BuyPageComponent},
-    {path: "history", component: HistoryPageComponent}
-  ]},
+  {
+    path: '',
+    component: PostLoginPage,
+    children: [
+      {
+        path: 'buy',
+        loadChildren: () => import('./buy/buy.module').then((m) => m.BuyModule),
+      },
+      {
+        path: 'history',
+        loadChildren: () =>
+          import('./history/history.module').then((m) => m.HistoryModule),
+      },
+      {
+        path: '',
+        redirectTo: '/home/buy',
+        pathMatch: 'full',
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
 })
-export class PostLoginRoutingModule { }
+export class PostLoginRoutingModule {}
