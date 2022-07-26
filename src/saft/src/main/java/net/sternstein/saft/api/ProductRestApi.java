@@ -1,7 +1,6 @@
 package net.sternstein.saft.api;
 
 import net.sternstein.saft.model.dto.product.CreateProductRequest;
-import net.sternstein.saft.model.dto.product.DeleteProductRequest;
 import net.sternstein.saft.model.dto.product.UpdateProductRequest;
 import net.sternstein.saft.service.ProductService;
 
@@ -20,28 +19,43 @@ public class ProductRestApi implements ProductApi {
     @POST
     @Override
     public Response createProduct(CreateProductRequest request) {
-        // productService.createProduct();
-        return null;
+        var product = productService.createProduct(request.name(), request.price());
+        return Response.ok().entity(product).build();
     }
 
     @GET
     @Override
+    // TODO: GAJ ID!
+    public Response getProduct(Long id) {
+        var product = productService.getProduct(id);
+        return Response.ok().entity(product).build();
+    }
+
+    @GET
+    // TODO: check path ok?
+    @Path("all")
+    @Override
     public Response getAllProducts() {
-        // productService.getAllProducts();
-        return null;
+        var products = productService.getAllProducts();
+        return Response.ok().entity(products).build();
     }
 
     @PUT
     @Override
     public Response updateProduct(UpdateProductRequest request) {
-        // productService.updateProduct();
-        return null;
+        var product = productService.updateProduct(request.product());
+        return Response.ok().entity(product).build();
     }
 
     @DELETE
     @Override
-    public Response deleteProduct(DeleteProductRequest request) {
-        // productService.deleteProduct();
-        return null;
+    // TODO: GAJ ID!
+    public Response deleteProduct(Long id) {
+        boolean isRemoved = productService.deleteProduct(id);
+        if(!isRemoved) {
+            // TODO: do this the right way
+            return Response.serverError().build();
+        }
+        return Response.ok().build();
     }
 }

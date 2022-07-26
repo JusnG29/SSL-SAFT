@@ -1,4 +1,6 @@
 package net.sternstein.saft.model.dto.transaction;
 
-public class CreateTransactionRequest {
+import java.math.BigDecimal;
+
+public record CreateTransactionRequest(Long userId, Long productId, BigDecimal value, int amount) {
 }

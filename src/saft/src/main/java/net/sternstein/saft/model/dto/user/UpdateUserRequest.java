@@ -1,4 +1,7 @@
 package net.sternstein.saft.model.dto.user;
 
-public class UpdateUserRequest {
+import net.sternstein.saft.domain.User;
+
+// TODO: check serialization stuff
+public record UpdateUserRequest(User user) {
 }
