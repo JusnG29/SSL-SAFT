@@ -26,8 +26,18 @@ public class UserRestApi implements UserApi {
         return Response.ok().entity(user).build();
     }
 
-    @Override
     @GET
+    @Override
+    // TODO: GAJ ID!
+    public Response getUser(Long id) {
+        var user = userService.getUser(id);
+        return Response.ok().entity(user).build();
+    }
+
+    @GET
+    // TODO: check Path ok?
+    @Path("all")
+    @Override
     public Response getAllUsers() {
         var users = userService.getAllUsers();
 
@@ -37,14 +47,19 @@ public class UserRestApi implements UserApi {
     @PUT
     @Override
     public Response updateUser(UpdateUserRequest request) {
-        // userService.updateUser();
-        return null;
+        var user = userService.updateUser(request.user());
+        return Response.ok().entity(user).build();
     }
 
     @DELETE
     @Override
-    public Response deleteUser(DeleteUserRequest request) {
-        // userService.deleteUser();
-        return null;
+    // TODO: GAJ ID!
+    public Response deleteUser(Long id) {
+        boolean isRemoved = userService.deleteUser(id);
+        if(!isRemoved) {
+            // TODO: do this the right way
+            return Response.serverError().build();
+        }
+        return Response.ok().build();
     }
 }
