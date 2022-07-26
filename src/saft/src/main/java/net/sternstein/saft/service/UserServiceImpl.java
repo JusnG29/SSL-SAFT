@@ -1,4 +1,4 @@
-package net.sternstein.saft.services;
+package net.sternstein.saft.service;
 
 import net.sternstein.saft.domain.User;
 import net.sternstein.saft.persistence.UserRepository;

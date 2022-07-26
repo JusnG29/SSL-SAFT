@@ -1,9 +1,9 @@
 package net.sternstein.saft.api;
 
-import net.sternstein.saft.models.dtos.transaction.CreateTransactionRequest;
-import net.sternstein.saft.models.dtos.transaction.DeleteTransactionRequest;
-import net.sternstein.saft.models.dtos.transaction.GetTransactionRequest;
-import net.sternstein.saft.models.dtos.transaction.UpdateTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.CreateTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.DeleteTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.GetTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.UpdateTransactionRequest;
 
 import javax.ws.rs.core.Response;
 

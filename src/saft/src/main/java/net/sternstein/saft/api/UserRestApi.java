@@ -1,9 +1,9 @@
 package net.sternstein.saft.api;
 
-import net.sternstein.saft.models.dtos.user.CreateUserRequest;
-import net.sternstein.saft.models.dtos.user.DeleteUserRequest;
-import net.sternstein.saft.models.dtos.user.UpdateUserRequest;
-import net.sternstein.saft.services.UserService;
+import net.sternstein.saft.model.dto.user.CreateUserRequest;
+import net.sternstein.saft.model.dto.user.DeleteUserRequest;
+import net.sternstein.saft.model.dto.user.UpdateUserRequest;
+import net.sternstein.saft.service.UserService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

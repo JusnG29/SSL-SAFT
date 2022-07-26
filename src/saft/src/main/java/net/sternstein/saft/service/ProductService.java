@@ -1,4 +1,4 @@
-package net.sternstein.saft.services;
+package net.sternstein.saft.service;
 
 public interface ProductService {
     void createProduct();
