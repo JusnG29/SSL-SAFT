@@ -21,28 +21,28 @@ public class TransactionRestApi implements TransactionApi {
     @POST
     @Override
     public Response createTransaction(CreateTransactionRequest request) {
-        transactionService.createTransaction();
+        // transactionService.createTransaction();
         return null;
     }
 
     @GET
     @Override
     public Response getTransaction(GetTransactionRequest request) {
-        transactionService.getTransaction();
+        // transactionService.getTransaction();
         return null;
     }
 
     @PUT
     @Override
     public Response updateTransaction(UpdateTransactionRequest request) {
-        transactionService.updateTransaction();
+        // transactionService.updateTransaction();
         return null;
     }
 
     @DELETE
     @Override
     public Response deleteTransaction(DeleteTransactionRequest request) {
-        transactionService.deleteTransaction();
+        // transactionService.deleteTransaction();
         return null;
     }
 }

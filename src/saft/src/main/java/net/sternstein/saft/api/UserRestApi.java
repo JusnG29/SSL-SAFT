@@ -37,14 +37,14 @@ public class UserRestApi implements UserApi {
     @PUT
     @Override
     public Response updateUser(UpdateUserRequest request) {
-        userService.updateUser();
+        // userService.updateUser();
         return null;
     }
 
     @DELETE
     @Override
     public Response deleteUser(DeleteUserRequest request) {
-        userService.deleteUser();
+        // userService.deleteUser();
         return null;
     }
 }

@@ -1,8 +1,14 @@
 package net.sternstein.saft.service;
 
+import net.sternstein.saft.domain.Product;
+
+import java.math.BigDecimal;
+import java.util.List;
+
 public interface ProductService {
-    void createProduct();
-    void getAllProducts();
-    void updateProduct();
-    void deleteProduct();
+    Product createProduct(String name, BigDecimal price);
+    Product getProduct(Long id);
+    List<Product> getAllProducts();
+    Product updateProduct(Product product);
+    boolean deleteProduct(Long id);
 }

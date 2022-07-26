@@ -20,28 +20,28 @@ public class ProductRestApi implements ProductApi {
     @POST
     @Override
     public Response createProduct(CreateProductRequest request) {
-        productService.createProduct();
+        // productService.createProduct();
         return null;
     }
 
     @GET
     @Override
     public Response getAllProducts() {
-        productService.getAllProducts();
+        // productService.getAllProducts();
         return null;
     }
 
     @PUT
     @Override
     public Response updateProduct(UpdateProductRequest request) {
-        productService.updateProduct();
+        // productService.updateProduct();
         return null;
     }
 
     @DELETE
     @Override
     public Response deleteProduct(DeleteProductRequest request) {
-        productService.deleteProduct();
+        // productService.deleteProduct();
         return null;
     }
 }
