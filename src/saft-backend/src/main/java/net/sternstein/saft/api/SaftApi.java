@@ -8,7 +8,8 @@ import javax.ws.rs.core.Response;
 
 public interface UserApi {
     Response createUser(CreateUserRequest request);
+    Response getUser(Long id);
     Response getAllUsers();
     Response updateUser(UpdateUserRequest request);
-    Response deleteUser(DeleteUserRequest request);
+    Response deleteUser(Long id);
 }
