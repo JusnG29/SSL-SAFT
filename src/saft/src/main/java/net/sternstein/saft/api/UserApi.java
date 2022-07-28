@@ -16,4 +16,5 @@ public interface UserApi {
     Response deleteUser(UUID id);
     Response login(LoginRequest request);
     Response balance(BalanceRequest request);
+    Response init();
 }

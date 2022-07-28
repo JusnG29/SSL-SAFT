@@ -83,4 +83,14 @@ public class UserRestApi implements UserApi {
         var balance = userService.getBalance(request.id());
         return Response.ok().entity(balance).build();
     }
+
+    //TODO: remove! only for local dev
+    @POST
+    @Path("init")
+    @Transactional
+    @Override
+    public Response init() {
+        userService.init();
+        return Response.ok().build();
+    }
 }
