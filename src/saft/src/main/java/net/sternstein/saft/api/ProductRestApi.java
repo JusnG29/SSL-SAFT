@@ -5,6 +5,7 @@ import net.sternstein.saft.model.dto.product.UpdateProductRequest;
 import net.sternstein.saft.service.ProductService;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
@@ -18,6 +19,7 @@ public class ProductRestApi implements ProductApi {
     ProductService productService;
 
     @POST
+    @Transactional
     @Override
     public Response createProduct(CreateProductRequest request) {
         var product = productService.createProduct(request.name(), request.price());
@@ -25,6 +27,7 @@ public class ProductRestApi implements ProductApi {
     }
 
     @GET
+    @Path("{id}")
     @Override
     public Response getProduct(UUID id) {
         var product = productService.getProduct(id);
@@ -32,7 +35,6 @@ public class ProductRestApi implements ProductApi {
     }
 
     @GET
-    // TODO: check path ok?
     @Path("all")
     @Override
     public Response getAllProducts() {
@@ -41,6 +43,7 @@ public class ProductRestApi implements ProductApi {
     }
 
     @PUT
+    @Transactional
     @Override
     public Response updateProduct(UpdateProductRequest request) {
         var product = productService.updateProduct(request.product());
@@ -48,6 +51,8 @@ public class ProductRestApi implements ProductApi {
     }
 
     @DELETE
+    @Path("{id}")
+    @Transactional
     @Override
     public Response deleteProduct(UUID id) {
         boolean isRemoved = productService.deleteProduct(id);
