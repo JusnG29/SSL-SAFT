@@ -13,4 +13,5 @@ public interface UserApi {
     Response getAllUsers();
     Response updateUser(UpdateUserRequest request);
     Response deleteUser(UUID id);
+    Response login(LoginRequest request);
 }

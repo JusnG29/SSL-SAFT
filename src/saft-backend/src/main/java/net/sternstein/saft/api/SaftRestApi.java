@@ -62,4 +62,16 @@ public class UserRestApi implements UserApi {
         userService.deleteUser(id);
         return Response.ok().build();
     }
+
+    @GET
+    @Path("login")
+    @Override
+    public Response login(LoginRequest request) {
+        boolean success = userService.login(request.id(), request.passcode());
+
+        if(!success) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+        return Response.ok().build();
+    }
 }
