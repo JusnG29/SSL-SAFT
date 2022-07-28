@@ -1,6 +1,8 @@
 package net.sternstein.saft.api;
 
 import net.sternstein.saft.model.dto.transaction.CreateTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.GetUserHistoryRequest;
+import net.sternstein.saft.model.dto.transaction.PurchaseRequest;
 import net.sternstein.saft.model.dto.transaction.UpdateTransactionRequest;
 
 import javax.ws.rs.core.Response;
@@ -12,4 +14,6 @@ public interface TransactionApi {
     Response getAllTransactions();
     Response updateTransaction(UpdateTransactionRequest request);
     Response deleteTransaction(UUID id);
+    Response purchase(PurchaseRequest request);
+    Response getUserHistory(GetUserHistoryRequest request);
 }
