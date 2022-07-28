@@ -49,7 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public boolean deleteTransaction(UUID id) {
-        return transactionRepository.deleteById(id);
+    public void deleteTransaction(UUID id) {
+        transactionRepository.deleteById(id);
     }
 }
