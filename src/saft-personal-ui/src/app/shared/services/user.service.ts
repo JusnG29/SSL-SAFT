@@ -15,6 +15,10 @@ export class UserService {
     return this.authenticatedUser.value;
   }
 
+  public setAuthenticatedUser(user: User): void {
+    this.authenticatedUser.next(user);
+  }
+
   public isAuthenticated(): boolean {
     return this.authenticatedUser.value !== undefined;
   }

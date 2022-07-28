@@ -1,21 +1,14 @@
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { PostLoginRoutingModule } from './post-login-routing.module';
-import { BuyPageComponent } from './buy-page/buy-page.component';
-import { HistoryPageComponent } from './history-page/history-page.component';
-import { PostLoginPageComponent } from './post-login-page/post-login-page.component';
 
+import { PostLoginPage } from './post-login.page';
 
 @NgModule({
-  declarations: [
-    BuyPageComponent,
-    HistoryPageComponent,
-    PostLoginPageComponent
-  ],
-  imports: [
-    CommonModule,
-    PostLoginRoutingModule
-  ]
+  imports: [IonicModule, CommonModule, FormsModule, PostLoginRoutingModule],
+  declarations: [PostLoginPage],
 })
-export class PostLoginModule { }
+export class PostLoginModule {}
