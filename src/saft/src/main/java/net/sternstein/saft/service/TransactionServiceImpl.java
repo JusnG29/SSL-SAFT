@@ -2,6 +2,7 @@ package net.sternstein.saft.service;
 
 import io.quarkus.hibernate.orm.panache.Panache;
 import net.sternstein.saft.domain.Transaction;
+import net.sternstein.saft.domain.User;
 import net.sternstein.saft.persistence.ProductRepository;
 import net.sternstein.saft.persistence.TransactionRepository;
 import net.sternstein.saft.persistence.UserRepository;
@@ -51,5 +52,18 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void deleteTransaction(UUID id) {
         transactionRepository.deleteById(id);
+    }
+
+    @Override
+    public Transaction purchase(UUID userId, UUID productId, BigDecimal value, int amount) {
+        var transaction = createTransaction(userId, productId, value, amount);
+
+        User user = userRepository.findById(userId);
+        BigDecimal newBalance = user.getBalance().subtract(value.multiply(BigDecimal.valueOf(amount)));
+        user.setBalance(newBalance);
+
+        Panache.getEntityManager().merge(user);
+
+        return transaction;
     }
 }

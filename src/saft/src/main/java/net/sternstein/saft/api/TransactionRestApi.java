@@ -1,6 +1,7 @@
 package net.sternstein.saft.api;
 
 import net.sternstein.saft.model.dto.transaction.CreateTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.PurchaseRequest;
 import net.sternstein.saft.model.dto.transaction.UpdateTransactionRequest;
 import net.sternstein.saft.service.TransactionService;
 
@@ -57,5 +58,14 @@ public class TransactionRestApi implements TransactionApi {
     public Response deleteTransaction(UUID id) {
         transactionService.deleteTransaction(id);
         return Response.ok().build();
+    }
+
+    @POST
+    @Path("purchase")
+    @Transactional
+    @Override
+    public Response purchase(PurchaseRequest request) {
+        var transaction = transactionService.purchase(request.userId(), request.productId(), request.value(), request.amount());
+        return Response.ok().entity(transaction).build();
     }
 }
