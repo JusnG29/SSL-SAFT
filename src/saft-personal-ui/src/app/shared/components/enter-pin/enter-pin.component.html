@@ -1,3 +1,16 @@
-<p>
-  enter-pin works!
-</p>
+<form [formGroup]="loginForm" class="flex flex-col">
+  <mat-form-field appearance="fill">
+    <input
+      matInput
+      placeholder="Passcode"
+      formControlName="passCode"
+      type="password"
+      inputmode="numeric"
+      required
+    />
+  </mat-form-field>
+
+  <button mat-raised-button (click)="returnToView()" color="primary">
+    Login
+  </button>
+</form>
