@@ -7,4 +7,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>Buying here</ion-content>
+<ion-content>
+  <section class="grid grid-cols-2 m-8">
+    <mat-card class="m-3" *ngFor="let product of allProducts">
+      <mat-card-content>
+        <div class="flex flex-col">
+          <span class="font-bold">{{product.name}}</span>
+          <span>{{product.price | currency}}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</ion-content>
