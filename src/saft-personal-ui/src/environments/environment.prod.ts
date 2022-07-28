@@ -1,3 +1,6 @@
+// TODO: Fix backend url
+
 export const environment = {
-  production: true
+  production: true,
+  saftBackendUrl: 'localhost:5000',
 };

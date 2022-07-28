@@ -34,3 +34,9 @@ There are two ways to get insights into the local dev database:
   - Database: `saft-db`
 - Connect via IDE or dedicated tool such as [pgAdmin](https://www.pgadmin.org/)
   - Use same credentials as above
+
+### Angular: Generate OpenAPI clients
+
+```text
+ng-openapi-gen --input my-api.yaml --output my-app/src/app/api
+```
