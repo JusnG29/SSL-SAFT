@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { Product } from '../../openapi-generated/models';
 import { ProductService } from '../../shared/services/product.service';
@@ -10,9 +11,18 @@ import { ProductService } from '../../shared/services/product.service';
 })
 export class BuyPage implements OnInit, OnDestroy {
   public allProducts: Product[] = [];
+  public countFormGroup: FormGroup;
+  public selectedProduct: Product | undefined = undefined;
   private $end: Subject<void> = new Subject();
 
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private readonly productService: ProductService
+  ) {
+    this.countFormGroup = formBuilder.group({
+      count: [1, Validators.compose([Validators.min(1)])],
+    });
+  }
 
   ngOnInit(): void {
     this.loadAllProducts();
@@ -21,6 +31,21 @@ export class BuyPage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.$end.next();
     this.$end.complete();
+  }
+
+  public getProductCount(): number {
+    return this.countFormGroup.get('count').value;
+  }
+
+  public setSelectedProduct(product: Product): void {
+    this.selectedProduct = product;
+  }
+
+  // TODO: Fix border coloring
+  public isSelectedProduct(product: Product): boolean {
+    if (!this.selectedProduct) return false;
+
+    return product.id === this.selectedProduct.id;
   }
 
   private loadAllProducts(): void {
