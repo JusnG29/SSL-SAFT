@@ -40,5 +40,5 @@ There are two ways to get insights into the local dev database:
 Inside `/src/saft-personal-ui` execute:
 
 ```text
-ng-openapi-gen --input my-api.yaml --output my-app/src/app/api
+ng-openapi-gen --input ./src/openapi/openapi-saft --output ./src/app/openapi-generated
 ```
