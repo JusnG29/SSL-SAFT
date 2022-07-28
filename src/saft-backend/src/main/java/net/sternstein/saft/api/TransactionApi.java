@@ -12,4 +12,5 @@ public interface TransactionApi {
     Response getAllTransactions();
     Response updateTransaction(UpdateTransactionRequest request);
     Response deleteTransaction(UUID id);
+    Response purchase(PurchaseRequest request);
 }
