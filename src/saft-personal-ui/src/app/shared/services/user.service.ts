@@ -34,6 +34,11 @@ export class UserService {
     return throwError(() => new Error('Authentication failed'));
   }
 
+  public logout(): void {
+    // TODO: Implement logout
+    this.authenticatedUser = undefined;
+  }
+
   public getTestUser(): User {
     return this.getAllUsers[0];
   }

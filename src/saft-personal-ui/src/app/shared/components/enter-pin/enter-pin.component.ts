@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-enter-pin',
@@ -9,20 +10,40 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class EnterPinComponent implements OnInit {
   public loginForm: FormGroup;
+  public invalidPinError = false;
+
+  private $end: Subject<void> = new Subject();
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly pinDialogRef: MatDialogRef<EnterPinComponent, string>
+    private readonly pinDialogRef: MatDialogRef<EnterPinComponent, boolean>
   ) {
     this.loginForm = formBuilder.group({
       passCode: [undefined, Validators.compose([Validators.required])],
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.subscribeToPinChange();
+  }
 
-  public returnToView(): void {
+  public tryReturnToView(): void {
     // TODO: Validate pin
-    this.pinDialogRef.close(this.loginForm.get('passCode').value);
+
+    const passCode = this.loginForm.get('passCode').value;
+
+    const validationResult = true;
+
+    if (validationResult && !this.invalidPinError) {
+      this.pinDialogRef.close(true);
+    } else {
+      this.invalidPinError = false;
+    }
+  }
+
+  public subscribeToPinChange() {
+    this.loginForm.valueChanges
+      .pipe(takeUntil(this.$end))
+      .subscribe({ next: () => (this.invalidPinError = false) });
   }
 }

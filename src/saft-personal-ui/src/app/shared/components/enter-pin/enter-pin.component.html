@@ -10,7 +10,16 @@
     />
   </mat-form-field>
 
-  <button mat-raised-button (click)="returnToView()" color="primary">
+  <div class="text-red-600" [class.invisible]="!invalidPinError">
+    Invalid PIN
+  </div>
+
+  <button
+    mat-raised-button
+    [disabled]="loginForm.invalid || invalidPinError"
+    (click)="tryReturnToView()"
+    color="primary"
+  >
     Login
   </button>
 </form>
