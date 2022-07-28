@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @ApplicationScoped
 public class ProductServiceImpl implements ProductService {
@@ -24,8 +25,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    // TODO: GAJ ID!
-    public Product getProduct(Long id) {
+    public Product getProduct(UUID id) {
         return productRepository.findById(id);
     }
 
@@ -41,8 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    // TODO: GAJ ID!
-    public boolean deleteProduct(Long id) {
+    public boolean deleteProduct(UUID id) {
         return productRepository.deleteById(id);
     }
 }

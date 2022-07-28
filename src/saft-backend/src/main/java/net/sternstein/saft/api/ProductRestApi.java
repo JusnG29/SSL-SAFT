@@ -8,6 +8,7 @@ import net.sternstein.saft.services.ProductService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 @Path("product")
 @Consumes("application/json")
@@ -26,8 +27,7 @@ public class ProductRestApi implements ProductApi {
 
     @GET
     @Override
-    // TODO: GAJ ID!
-    public Response getProduct(Long id) {
+    public Response getProduct(UUID id) {
         var product = productService.getProduct(id);
         return Response.ok().entity(product).build();
     }
@@ -50,8 +50,7 @@ public class ProductRestApi implements ProductApi {
 
     @DELETE
     @Override
-    // TODO: GAJ ID!
-    public Response deleteProduct(Long id) {
+    public Response deleteProduct(UUID id) {
         boolean isRemoved = productService.deleteProduct(id);
         if(!isRemoved) {
             // TODO: do this the right way

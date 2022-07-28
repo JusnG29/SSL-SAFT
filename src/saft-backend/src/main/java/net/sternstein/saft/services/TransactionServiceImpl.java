@@ -9,6 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @ApplicationScoped
 public class TransactionServiceImpl implements TransactionService {
@@ -21,8 +22,7 @@ public class TransactionServiceImpl implements TransactionService {
     TransactionRepository transactionRepository;
 
     @Override
-    // TODO: GAJ ID!
-    public Transaction createTransaction(Long userId, Long productId, BigDecimal value, int amount) {
+    public Transaction createTransaction(UUID userId, UUID productId, BigDecimal value, int amount) {
         var user = userRepository.findById(userId);
         var product = productRepository.findById(productId);
         var transaction = new Transaction(user, product, value, amount);
@@ -33,8 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    // TODO: GAJ ID!
-    public Transaction getTransaction(Long id) {
+    public Transaction getTransaction(UUID id) {
         return transactionRepository.findById(id);
     }
 
@@ -50,8 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    // TODO: GAJ ID!
-    public boolean deleteTransaction(Long id) {
+    public boolean deleteTransaction(UUID id) {
         return transactionRepository.deleteById(id);
     }
 }

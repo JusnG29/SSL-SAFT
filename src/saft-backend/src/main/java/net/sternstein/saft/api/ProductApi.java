@@ -4,11 +4,12 @@ import net.sternstein.saft.models.dtos.product.CreateProductRequest;
 import net.sternstein.saft.models.dtos.product.UpdateProductRequest;
 
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 public interface ProductApi {
     Response createProduct(CreateProductRequest request);
-    Response getProduct(Long id);
+    Response getProduct(UUID id);
     Response getAllProducts();
     Response updateProduct(UpdateProductRequest request);
-    Response deleteProduct(Long id);
+    Response deleteProduct(UUID id);
 }
