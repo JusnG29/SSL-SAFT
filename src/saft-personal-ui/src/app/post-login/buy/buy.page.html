@@ -8,14 +8,52 @@
 </ion-header>
 
 <ion-content>
-  <section class="grid grid-cols-2 m-8">
-    <mat-card class="m-3" *ngFor="let product of allProducts">
-      <mat-card-content>
-        <div class="flex flex-col">
-          <span class="font-bold">{{product.name}}</span>
-          <span>{{product.price | currency}}</span>
+  <mat-stepper #stepper orientation="vertical">
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>Artikel</ng-template>
+        <section class="grid grid-cols-2 m-8 gap-5">
+          <button
+            [class.border-blue-500]="isSelectedProduct(product)"
+            class="flex shadow-lg p-3 rounded-md"
+            *ngFor="let product of allProducts"
+            matStepperNext
+            (click)="setSelectedProduct(product)"
+          >
+            <div class="flex flex-col items-start">
+              <span class="font-bold">{{product.name}}</span>
+              <span>{{product.price | currency}}</span>
+            </div>
+          </button>
+        </section>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="countFormGroup" label="Anzahl">
+      <form class="mt-10 grid grid-cols-2 gap-5" [formGroup]="countFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Count</mat-label>
+          <input matInput formControlName="count" required numeric />
+        </mat-form-field>
+        <div>
+          <button mat-raised-button matStepperNext color="primary">
+            Weiter
+          </button>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </section>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Kaufen</ng-template>
+      <mat-card class="mt-5">
+        <mat-card-content>
+          {{selectedProduct?.name}} x {{getProductCount()}}
+        </mat-card-content>
+      </mat-card>
+      <div class="mt-5">
+        <button class="mr-10" mat-raised-button color="primary">Kaufen</button>
+        <button mat-raised-button color="warn" (click)="stepper.reset()">
+          Abbrechen
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
 </ion-content>
