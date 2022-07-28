@@ -1,6 +1,7 @@
 package net.sternstein.saft.api;
 
 import net.sternstein.saft.model.dto.transaction.CreateTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.GetUserHistoryRequest;
 import net.sternstein.saft.model.dto.transaction.PurchaseRequest;
 import net.sternstein.saft.model.dto.transaction.UpdateTransactionRequest;
 import net.sternstein.saft.service.TransactionService;
@@ -67,5 +68,13 @@ public class TransactionRestApi implements TransactionApi {
     public Response purchase(PurchaseRequest request) {
         var transaction = transactionService.purchase(request.userId(), request.productId(), request.value(), request.amount());
         return Response.ok().entity(transaction).build();
+    }
+
+    @POST
+    @Path("getUserHistory")
+    @Override
+    public Response getUserHistory(GetUserHistoryRequest request) {
+        var userHistory = transactionService.getUserHistory(request.userId());
+        return Response.ok().entity(userHistory).build();
     }
 }
