@@ -1,6 +1,7 @@
 package net.sternstein.saft.api;
 
 import net.sternstein.saft.model.dto.user.CreateUserRequest;
+import net.sternstein.saft.model.dto.user.LoginRequest;
 import net.sternstein.saft.model.dto.user.UpdateUserRequest;
 import net.sternstein.saft.service.UserService;
 
@@ -59,6 +60,18 @@ public class UserRestApi implements UserApi {
     @Override
     public Response deleteUser(UUID id) {
         userService.deleteUser(id);
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("login")
+    @Override
+    public Response login(LoginRequest request) {
+        boolean success = userService.login(request.id(), request.passcode());
+
+        if(!success) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
         return Response.ok().build();
     }
 }

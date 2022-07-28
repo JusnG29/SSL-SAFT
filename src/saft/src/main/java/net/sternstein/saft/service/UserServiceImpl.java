@@ -42,4 +42,10 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(UUID id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public boolean login(UUID id, String passcode) {
+        User user = userRepository.findById(id);
+        return user.getPasscode().equals(passcode);
+    }
 }
