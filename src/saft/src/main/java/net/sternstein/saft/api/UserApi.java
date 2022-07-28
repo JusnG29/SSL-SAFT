@@ -1,5 +1,6 @@
 package net.sternstein.saft.api;
 
+import net.sternstein.saft.model.dto.user.BalanceRequest;
 import net.sternstein.saft.model.dto.user.CreateUserRequest;
 import net.sternstein.saft.model.dto.user.LoginRequest;
 import net.sternstein.saft.model.dto.user.UpdateUserRequest;
@@ -14,4 +15,5 @@ public interface UserApi {
     Response updateUser(UpdateUserRequest request);
     Response deleteUser(UUID id);
     Response login(LoginRequest request);
+    Response balance(BalanceRequest request);
 }

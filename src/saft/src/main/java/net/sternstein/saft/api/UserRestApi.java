@@ -1,5 +1,6 @@
 package net.sternstein.saft.api;
 
+import net.sternstein.saft.model.dto.user.BalanceRequest;
 import net.sternstein.saft.model.dto.user.CreateUserRequest;
 import net.sternstein.saft.model.dto.user.LoginRequest;
 import net.sternstein.saft.model.dto.user.UpdateUserRequest;
@@ -73,5 +74,13 @@ public class UserRestApi implements UserApi {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
         return Response.ok().build();
+    }
+
+    @POST
+    @Path("balance")
+    @Override
+    public Response balance(BalanceRequest request) {
+        var balance = userService.getBalance(request.id());
+        return Response.ok().entity(balance).build();
     }
 }
