@@ -10,4 +10,5 @@ public interface UserService {
     List<User> getAllUsers();
     User updateUser(User user);
     void deleteUser(UUID id);
+    boolean login(UUID id, String passcode);
 }
