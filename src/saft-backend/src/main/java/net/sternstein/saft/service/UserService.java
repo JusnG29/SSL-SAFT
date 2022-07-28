@@ -14,4 +14,5 @@ public interface UserService {
     void deleteUser(UUID id);
     boolean login(UUID id, String passcode);
     BigDecimal getBalance(UUID id);
+    void init();
 }
