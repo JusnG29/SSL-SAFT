@@ -66,4 +66,9 @@ public class TransactionServiceImpl implements TransactionService {
 
         return transaction;
     }
+
+    @Override
+    public List<Transaction> getUserHistory(UUID userId) {
+        return transactionRepository.getAllTransactionsByUserId(userId);
+    }
 }

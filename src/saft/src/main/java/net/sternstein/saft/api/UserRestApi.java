@@ -63,7 +63,7 @@ public class UserRestApi implements UserApi {
         return Response.ok().build();
     }
 
-    @GET
+    @POST
     @Path("login")
     @Override
     public Response login(LoginRequest request) {

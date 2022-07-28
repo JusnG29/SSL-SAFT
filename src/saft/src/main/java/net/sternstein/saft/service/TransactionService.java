@@ -13,4 +13,5 @@ public interface TransactionService {
     Transaction updateTransaction(Transaction transaction);
     void deleteTransaction(UUID id);
     Transaction purchase(UUID userId, UUID productId, BigDecimal value, int amount);
+    List<Transaction> getUserHistory(UUID userId);
 }
