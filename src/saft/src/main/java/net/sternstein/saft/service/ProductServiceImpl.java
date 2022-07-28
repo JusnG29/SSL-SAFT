@@ -1,5 +1,6 @@
 package net.sternstein.saft.service;
 
+import io.quarkus.hibernate.orm.panache.Panache;
 import net.sternstein.saft.domain.Product;
 import net.sternstein.saft.persistence.ProductRepository;
 
@@ -36,8 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Product product) {
-        productRepository.persist(product);
-        return product;
+        return Panache.getEntityManager().merge(product);
     }
 
     @Override

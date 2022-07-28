@@ -1,5 +1,6 @@
 package net.sternstein.saft.service;
 
+import io.quarkus.hibernate.orm.panache.Panache;
 import net.sternstein.saft.domain.Transaction;
 import net.sternstein.saft.persistence.ProductRepository;
 import net.sternstein.saft.persistence.TransactionRepository;
@@ -44,8 +45,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction updateTransaction(Transaction transaction) {
-        transactionRepository.persist(transaction);
-        return transaction;
+        return Panache.getEntityManager().merge(transaction);
     }
 
     @Override
