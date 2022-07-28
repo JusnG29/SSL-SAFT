@@ -69,4 +69,12 @@ public class TransactionRestApi implements TransactionApi {
         var transaction = transactionService.purchase(request.userId(), request.productId(), request.value(), request.amount());
         return Response.ok().entity(transaction).build();
     }
+
+    @POST
+    @Path("getUserHistory")
+    @Override
+    public Response getUserHistory(GetUserHistoryRequest request) {
+        var userHistory = transactionService.getUserHistory(request.userId());
+        return Response.ok().entity(userHistory).build();
+    }
 }
