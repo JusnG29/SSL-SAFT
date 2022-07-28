@@ -37,6 +37,8 @@ There are two ways to get insights into the local dev database:
 
 ### Angular: Generate OpenAPI clients
 
+Inside `/src/saft-personal-ui` execute:
+
 ```text
 ng-openapi-gen --input my-api.yaml --output my-app/src/app/api
 ```
