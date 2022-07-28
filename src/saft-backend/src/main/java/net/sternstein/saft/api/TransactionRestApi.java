@@ -9,6 +9,7 @@ import net.sternstein.saft.services.TransactionService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 @Path("transaction")
 @Consumes("application/json")
@@ -20,7 +21,6 @@ public class TransactionRestApi implements TransactionApi {
 
     @POST
     @Override
-    // TODO: GAJ ID!
     public Response createTransaction(CreateTransactionRequest request) {
         var transaction = transactionService.createTransaction(request.userId(), request.productId(), request.value(), request.amount());
         return Response.ok().entity(transaction).build();
@@ -28,8 +28,7 @@ public class TransactionRestApi implements TransactionApi {
 
     @GET
     @Override
-    // TODO: GAJ ID!
-    public Response getTransaction(Long id) {
+    public Response getTransaction(UUID id) {
         var transaction = transactionService.getTransaction(id);
         return Response.ok().entity(transaction).build();
     }
@@ -52,8 +51,7 @@ public class TransactionRestApi implements TransactionApi {
 
     @DELETE
     @Override
-    // TODO: GAJ ID!
-    public Response deleteTransaction(Long id) {
+    public Response deleteTransaction(UUID id) {
         boolean isRemoved = transactionService.deleteTransaction(id);
         if(!isRemoved) {
             // TODO: do this the right way
