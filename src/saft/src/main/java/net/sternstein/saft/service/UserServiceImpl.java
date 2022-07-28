@@ -23,10 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    // TODO: likely conflict when using non UUID datatype - panache accepts only Long here
-    //  Note: Use PanacheEntityBase instead with @GeneratedValue annotation or similar (maybe ?!?!)
-    //  Check and/or change on all Methods with id as input (marked by "GAJ ID!" comment)
-    public User getUser(Long id) {
+    public User getUser(UUID id) {
         return userRepository.findById(id);
     }
 
@@ -42,8 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    // TODO: GAJ ID!
-    public boolean deleteUser(Long id) {
+    public boolean deleteUser(UUID id) {
         return userRepository.deleteById(id);
     }
 }

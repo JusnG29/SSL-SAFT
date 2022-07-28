@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public interface UserService {
     User createUser(String passcode, String couleurName);
-    User getUser(Long id);
+    User getUser(UUID id);
     List<User> getAllUsers();
     User updateUser(User user);
-    boolean deleteUser(Long id);
+    boolean deleteUser(UUID id);
 }

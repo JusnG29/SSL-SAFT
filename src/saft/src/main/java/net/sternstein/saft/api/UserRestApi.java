@@ -7,6 +7,7 @@ import net.sternstein.saft.service.UserService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 @Path("user")
 @Consumes("application/json")
@@ -27,8 +28,7 @@ public class UserRestApi implements UserApi {
 
     @GET
     @Override
-    // TODO: GAJ ID!
-    public Response getUser(Long id) {
+    public Response getUser(UUID id) {
         var user = userService.getUser(id);
         return Response.ok().entity(user).build();
     }
@@ -52,8 +52,7 @@ public class UserRestApi implements UserApi {
 
     @DELETE
     @Override
-    // TODO: GAJ ID!
-    public Response deleteUser(Long id) {
+    public Response deleteUser(UUID id) {
         boolean isRemoved = userService.deleteUser(id);
         if(!isRemoved) {
             // TODO: do this the right way
