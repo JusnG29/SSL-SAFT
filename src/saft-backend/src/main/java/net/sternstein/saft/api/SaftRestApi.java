@@ -6,6 +6,7 @@ import net.sternstein.saft.models.dtos.user.UpdateUserRequest;
 import net.sternstein.saft.services.UserService;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
@@ -17,8 +18,9 @@ public class UserRestApi implements UserApi {
     @Inject
     UserService userService;
 
-    @Override
     @POST
+    @Transactional
+    @Override
     public Response createUser(CreateUserRequest request) {
         // TODO: do some validation
 
@@ -28,6 +30,7 @@ public class UserRestApi implements UserApi {
     }
 
     @GET
+    @Path("{id}")
     @Override
     public Response getUser(UUID id) {
         var user = userService.getUser(id);
@@ -35,7 +38,6 @@ public class UserRestApi implements UserApi {
     }
 
     @GET
-    // TODO: check Path ok?
     @Path("all")
     @Override
     public Response getAllUsers() {
@@ -45,6 +47,7 @@ public class UserRestApi implements UserApi {
     }
 
     @PUT
+    @Transactional
     @Override
     public Response updateUser(UpdateUserRequest request) {
         var user = userService.updateUser(request.user());
@@ -52,6 +55,8 @@ public class UserRestApi implements UserApi {
     }
 
     @DELETE
+    @Path("{id}")
+    @Transactional
     @Override
     public Response deleteUser(UUID id) {
         boolean isRemoved = userService.deleteUser(id);
