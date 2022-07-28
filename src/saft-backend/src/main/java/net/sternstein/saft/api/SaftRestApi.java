@@ -1,9 +1,17 @@
 package net.sternstein.saft.api;
 
+<<<<<<< HEAD:src/saft-backend/src/main/java/net/sternstein/saft/api/SaftRestApi.java
 import net.sternstein.saft.models.dtos.user.CreateUserRequest;
 import net.sternstein.saft.models.dtos.user.DeleteUserRequest;
 import net.sternstein.saft.models.dtos.user.UpdateUserRequest;
 import net.sternstein.saft.services.UserService;
+=======
+import net.sternstein.saft.model.dto.user.BalanceRequest;
+import net.sternstein.saft.model.dto.user.CreateUserRequest;
+import net.sternstein.saft.model.dto.user.LoginRequest;
+import net.sternstein.saft.model.dto.user.UpdateUserRequest;
+import net.sternstein.saft.service.UserService;
+>>>>>>> 4ffa25b (added getBalance endpoint + functionality):src/saft/src/main/java/net/sternstein/saft/api/UserRestApi.java
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -73,5 +81,13 @@ public class UserRestApi implements UserApi {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
         return Response.ok().build();
+    }
+
+    @POST
+    @Path("balance")
+    @Override
+    public Response balance(BalanceRequest request) {
+        var balance = userService.getBalance(request.id());
+        return Response.ok().entity(balance).build();
     }
 }
