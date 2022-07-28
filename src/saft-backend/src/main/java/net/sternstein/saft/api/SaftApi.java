@@ -14,4 +14,5 @@ public interface UserApi {
     Response updateUser(UpdateUserRequest request);
     Response deleteUser(UUID id);
     Response login(LoginRequest request);
+    Response balance(BalanceRequest request);
 }

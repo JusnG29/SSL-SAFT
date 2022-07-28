@@ -6,7 +6,9 @@ import net.sternstein.saft.persistence.UserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -47,5 +49,11 @@ public class UserServiceImpl implements UserService {
     public boolean login(UUID id, String passcode) {
         User user = userRepository.findById(id);
         return user.getPasscode().equals(passcode);
+    }
+
+    @Override
+    public BigDecimal getBalance(UUID id) {
+        User user = Optional.of(userRepository.findById(id)).orElseThrow(() -> new RuntimeException("User not found with ID: " + id.toString()));
+        return user.getBalance();
     }
 }
