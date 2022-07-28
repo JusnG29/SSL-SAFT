@@ -60,4 +60,13 @@ public class TransactionRestApi implements TransactionApi {
         transactionService.deleteTransaction(id);
         return Response.ok().build();
     }
+
+    @POST
+    @Path("purchase")
+    @Transactional
+    @Override
+    public Response purchase(PurchaseRequest request) {
+        var transaction = transactionService.purchase(request.userId(), request.productId(), request.value(), request.amount());
+        return Response.ok().entity(transaction).build();
+    }
 }
