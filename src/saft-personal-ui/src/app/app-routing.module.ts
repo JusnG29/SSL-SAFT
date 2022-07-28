@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginModule } from './login/login.module';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  // TODO: Change to default route to 'home' once canActivate is in place
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
@@ -10,12 +10,20 @@ const routes: Routes = [
       import('./login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: "home", loadChildren: () => import("./post-login/post-login.module").then((m) => m.PostLoginModule)
-  }
+    path: 'home',
+    loadChildren: () =>
+      import('./post-login/post-login.module').then((m) => m.PostLoginModule),
+  },
+  {
+    path: '*',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
 ];
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
