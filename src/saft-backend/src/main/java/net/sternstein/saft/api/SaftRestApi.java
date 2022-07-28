@@ -59,11 +59,7 @@ public class UserRestApi implements UserApi {
     @Transactional
     @Override
     public Response deleteUser(UUID id) {
-        boolean isRemoved = userService.deleteUser(id);
-        if(!isRemoved) {
-            // TODO: do this the right way
-            return Response.serverError().build();
-        }
+        userService.deleteUser(id);
         return Response.ok().build();
     }
 }

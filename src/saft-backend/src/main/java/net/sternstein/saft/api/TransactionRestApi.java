@@ -57,11 +57,7 @@ public class TransactionRestApi implements TransactionApi {
     @Transactional
     @Override
     public Response deleteTransaction(UUID id) {
-        boolean isRemoved = transactionService.deleteTransaction(id);
-        if(!isRemoved) {
-            // TODO: do this the right way
-            return Response.serverError().build();
-        }
+        transactionService.deleteTransaction(id);
         return Response.ok().build();
     }
 }
