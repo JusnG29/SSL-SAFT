@@ -6,9 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { EnterPinComponent } from './components/enter-pin/enter-pin.component';
 import { MatButtonModule } from '@angular/material/button';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
-  declarations: [EnterPinComponent],
+  declarations: [EnterPinComponent, LogoutComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -17,6 +18,6 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
   ],
-  exports: [MatCardModule],
+  exports: [MatCardModule, LogoutComponent],
 })
 export class SharedModule {}
