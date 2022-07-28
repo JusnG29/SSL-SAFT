@@ -1,5 +1,6 @@
 package net.sternstein.saft.service;
 
+import io.quarkus.hibernate.orm.panache.Panache;
 import net.sternstein.saft.domain.User;
 import net.sternstein.saft.persistence.UserRepository;
 
@@ -34,8 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
-        userRepository.persist(user);
-        return user;
+        return Panache.getEntityManager().merge(user);
     }
 
     @Override
