@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
+import { User } from '../../shared/domain/user';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -8,8 +10,11 @@ import { UserService } from '../../shared/services/user.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
+  public allUsers: User[] = [];
+
+  private $end: Subject<void> = new Subject();
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -22,7 +27,18 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initializeUserList();
+  }
+
+  ngOnDestroy(): void {
+    this.$end.next();
+    this.$end.complete();
+  }
+
+  test() {
+    console.log(this.allUsers);
+  }
 
   public initializeLogin() {
     if (this.loginForm.valid) {
@@ -41,5 +57,16 @@ export class LoginPageComponent implements OnInit {
           },
         });
     }
+  }
+
+  // TODO: Add error handling
+  private initializeUserList(): void {
+    this.userService
+      .getAllUsers()
+      .pipe(takeUntil(this.$end))
+      .subscribe({
+        next: (users) => (this.allUsers = users),
+        error: (error) => console.error,
+      });
   }
 }

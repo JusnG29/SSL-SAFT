@@ -35,11 +35,47 @@ export class UserService {
   }
 
   public getTestUser(): User {
-    return {
-      id: 'someid',
-      couleurName: 'Skywalker',
-      passCode: '1234',
-      balance: 0,
-    };
+    return this.getAllUsers[0];
+  }
+
+  public getAllUsers(): Observable<User[]> {
+    return of([
+      {
+        id: 'someid0',
+        couleurName: 'Skywalker',
+        passCode: '1234',
+        balance: 0,
+      },
+      {
+        id: 'someid1',
+        couleurName: 'Jusn',
+        passCode: '1234',
+        balance: 0,
+      },
+      {
+        id: 'someid2',
+        couleurName: 'Jusn',
+        passCode: '1234',
+        balance: 0,
+      },
+      {
+        id: 'someid3',
+        couleurName: 'Limos',
+        passCode: '1234',
+        balance: 0,
+      },
+      {
+        id: 'someid4',
+        couleurName: 'UMad',
+        passCode: '1234',
+        balance: 0,
+      },
+      {
+        id: 'someid5',
+        couleurName: 'Malygos',
+        passCode: '1234',
+        balance: 0,
+      },
+    ]);
   }
 }
