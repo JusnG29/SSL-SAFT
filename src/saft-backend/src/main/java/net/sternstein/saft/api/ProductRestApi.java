@@ -56,11 +56,7 @@ public class ProductRestApi implements ProductApi {
     @Transactional
     @Override
     public Response deleteProduct(UUID id) {
-        boolean isRemoved = productService.deleteProduct(id);
-        if(!isRemoved) {
-            // TODO: do this the right way
-            return Response.serverError().build();
-        }
+        productService.deleteProduct(id);
         return Response.ok().build();
     }
 }
