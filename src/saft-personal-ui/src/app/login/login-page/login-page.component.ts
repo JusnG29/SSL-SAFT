@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NavController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
+import { User } from '../../openapi-generated/models';
 import { EnterPinComponent } from '../../shared/components/enter-pin/enter-pin.component';
-import { User } from '../../shared/domain/user';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({

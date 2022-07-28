@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { User } from '../domain/user';
+import { BehaviorSubject, map, Observable, of, throwError } from 'rxjs';
+import { User } from '../../openapi-generated/models';
+import { UserRestApiService } from '../../openapi-generated/services';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ export class UserService {
   private authenticatedUser: BehaviorSubject<User | undefined> =
     new BehaviorSubject<User | undefined>(undefined);
 
-  constructor() {}
+  constructor(private readonly userService: UserRestApiService) {}
 
   public getAuthenticatedUser(): User | undefined {
     return this.authenticatedUser.value;
@@ -26,7 +27,7 @@ export class UserService {
   public login(couleurName: string, passCode: string): Observable<User> {
     if (
       couleurName === this.getTestUser().couleurName &&
-      passCode === this.getTestUser().passCode
+      passCode === this.getTestUser().passcode
     ) {
       return of(this.getTestUser());
     }
@@ -44,43 +45,8 @@ export class UserService {
   }
 
   public getAllUsers(): Observable<User[]> {
-    return of([
-      {
-        id: 'someid0',
-        couleurName: 'Skywalker',
-        passCode: '1234',
-        balance: 0,
-      },
-      {
-        id: 'someid1',
-        couleurName: 'Jusn',
-        passCode: '1234',
-        balance: 0,
-      },
-      {
-        id: 'someid2',
-        couleurName: 'Jusn',
-        passCode: '1234',
-        balance: 0,
-      },
-      {
-        id: 'someid3',
-        couleurName: 'Limos',
-        passCode: '1234',
-        balance: 0,
-      },
-      {
-        id: 'someid4',
-        couleurName: 'UMad',
-        passCode: '1234',
-        balance: 0,
-      },
-      {
-        id: 'someid5',
-        couleurName: 'Malygos',
-        passCode: '1234',
-        balance: 0,
-      },
-    ]);
+    return this.userService
+      .getAllUsers$Response()
+      .pipe(map((value) => value.body));
   }
 }
