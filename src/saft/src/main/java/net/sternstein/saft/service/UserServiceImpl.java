@@ -6,6 +6,7 @@ import net.sternstein.saft.persistence.UserRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.UUID;
 
 @ApplicationScoped
 public class UserServiceImpl implements UserService {
@@ -22,7 +23,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(UUID id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll().stream().toList();
+    }
+
+    @Override
+    public User updateUser(User user) {
+        userRepository.persist(user);
+        return user;
+    }
+
+    @Override
+    public boolean deleteUser(UUID id) {
+        return userRepository.deleteById(id);
     }
 }

@@ -24,7 +24,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(UUID id, User user, Product product, BigDecimal value, int amount) {
+    public Transaction(User user, Product product, BigDecimal value, int amount) {
         this.id = UUID.randomUUID();
         this.user = user;
         this.product = product;
