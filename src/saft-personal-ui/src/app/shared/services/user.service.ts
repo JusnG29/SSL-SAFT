@@ -24,15 +24,16 @@ export class UserService {
     return this.authenticatedUser.value !== undefined;
   }
 
-  public login(couleurName: string, passCode: string): Observable<User> {
-    if (
-      couleurName === this.getTestUser().couleurName &&
-      passCode === this.getTestUser().passcode
-    ) {
-      return of(this.getTestUser());
-    }
-
-    return throwError(() => new Error('Authentication failed'));
+  public login(id: string, passcode: string): Observable<User | undefined> {
+    return this.userService.login$Response({ body: { id, passcode } }).pipe(
+      map((response) => {
+        if (response.ok) {
+          return response.body;
+        } else {
+          throwError(() => 'Could not parse user');
+        }
+      })
+    );
   }
 
   public logout(): void {

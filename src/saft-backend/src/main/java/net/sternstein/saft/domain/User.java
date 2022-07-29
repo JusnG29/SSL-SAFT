@@ -19,7 +19,7 @@ public class User {
 
     public User() {}
 
-    public User(String passcode, String couleurName) {
+    public User(String couleurName, String passcode) {
         id = UUID.randomUUID();
         balance = BigDecimal.ZERO;
         this.passcode = passcode;

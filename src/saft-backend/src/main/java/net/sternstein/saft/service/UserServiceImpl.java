@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     // TODO: remove! only for local dev
     public void init() {
         User odin = new User("Odin", "1234");
-        User lego = new User("Lego", "0815");
+        User lego = new User("Skywalker", "0815");
         Product bier = new Product("Bier", BigDecimal.ONE);
         Product eiskaffe = new Product("Eiskaffe", BigDecimal.valueOf(1.2));
 

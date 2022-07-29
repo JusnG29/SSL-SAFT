@@ -12,6 +12,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -131,7 +132,7 @@ public class UserRestApi implements UserApi {
                     name = "Success",
                     description = "User was logged in",
                     content = @Content(
-                            schema = @Schema(type = SchemaType.DEFAULT),
+                            schema = @Schema(type = SchemaType.OBJECT, implementation = User.class),
                             mediaType = MediaType.APPLICATION_JSON),
                     responseCode = "200"
             )})
@@ -142,7 +143,10 @@ public class UserRestApi implements UserApi {
         if(!success) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
-        return Response.ok().build();
+
+        var user = userService.getUser(request.id());
+
+        return Response.ok(user).build();
     }
 
     @POST

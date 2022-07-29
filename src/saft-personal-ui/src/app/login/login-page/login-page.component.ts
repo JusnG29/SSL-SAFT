@@ -32,7 +32,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   public openPinDialog(user: User): void {
-    const pinDialogRef = this.pinDialog.open(EnterPinComponent);
+    const pinDialogRef = this.pinDialog.open(EnterPinComponent, {
+      data: { user },
+    });
 
     pinDialogRef.afterClosed().subscribe((isValid) => {
       if (isValid) {

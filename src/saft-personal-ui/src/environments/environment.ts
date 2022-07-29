@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  saftBackendUrl: 'localhost:5000',
+  saftBackendUrl: 'http://localhost:5000',
 };
 
 /*
