@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
+import { User } from '../../../openapi-generated/models';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-enter-pin',
@@ -11,13 +13,17 @@ import { Subject, takeUntil } from 'rxjs';
 export class EnterPinComponent implements OnInit {
   public loginForm: FormGroup;
   public invalidPinError = false;
+  private user: User;
 
   private $end: Subject<void> = new Subject();
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly pinDialogRef: MatDialogRef<EnterPinComponent, boolean>
+    private readonly pinDialogRef: MatDialogRef<EnterPinComponent, boolean>,
+    private readonly userService: UserService,
+    @Inject(MAT_DIALOG_DATA) public data: { user: User }
   ) {
+    this.user = data.user;
     this.loginForm = formBuilder.group({
       passCode: [undefined, Validators.compose([Validators.required])],
     });
@@ -28,17 +34,24 @@ export class EnterPinComponent implements OnInit {
   }
 
   public tryReturnToView(): void {
-    // TODO: Validate pin
-
     const passCode = this.loginForm.get('passCode').value;
-
-    const validationResult = true;
-
-    if (validationResult && !this.invalidPinError) {
-      this.pinDialogRef.close(true);
-    } else {
-      this.invalidPinError = false;
-    }
+    this.userService
+      .login(this.user.id, passCode)
+      .pipe(takeUntil(this.$end))
+      .subscribe({
+        next: (user) => {
+          console.log(user);
+          if (user && user.id === this.user.id && !this.invalidPinError) {
+            this.pinDialogRef.close(true);
+          } else {
+            this.invalidPinError = false;
+          }
+        },
+        error: () => {
+          this.loginForm.reset();
+          this.invalidPinError = true;
+        },
+      });
   }
 
   public subscribeToPinChange() {
