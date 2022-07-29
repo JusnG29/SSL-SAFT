@@ -1,7 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <app-logout></app-logout>
+    </ion-buttons>
     <ion-title> History </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>history here</ion-content>
+<ion-content>
+  <section>
+    <mat-card class="m-5" *ngFor="let transaction of history"
+      >{{transaction.product.name}}</mat-card
+    >
+  </section>
+</ion-content>
