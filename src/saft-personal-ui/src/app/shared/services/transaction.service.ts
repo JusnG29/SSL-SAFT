@@ -16,4 +16,15 @@ export class TransactionService {
       .getUserHistory$Response({ body: { userId } })
       .pipe(map((response) => response.body));
   }
+
+  public purchase(
+    userId: string,
+    productId: string,
+    amount: number
+  ): Observable<Transaction> {
+    // TODO: Dynamic price
+    return this.transactionRestService
+      .purchase$Response({ body: { userId, productId, amount, value: 3.5 } })
+      .pipe(map((response) => response.body));
+  }
 }

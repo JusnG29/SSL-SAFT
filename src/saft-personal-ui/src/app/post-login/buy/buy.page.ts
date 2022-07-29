@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { Product } from '../../openapi-generated/models';
 import { ProductService } from '../../shared/services/product.service';
+import { TransactionService } from '../../shared/services/transaction.service';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-buy',
@@ -17,7 +19,9 @@ export class BuyPage implements OnInit, OnDestroy {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private readonly transactionService: TransactionService,
+    private readonly userService: UserService
   ) {
     this.countFormGroup = formBuilder.group({
       count: [1, Validators.compose([Validators.min(1)])],
@@ -46,6 +50,23 @@ export class BuyPage implements OnInit, OnDestroy {
     if (!this.selectedProduct) return false;
 
     return product.id === this.selectedProduct.id;
+  }
+
+  public initializePurchase(): void {
+    const user = this.userService.getAuthenticatedUser();
+    const count = this.countFormGroup.get('count').value;
+
+    if (user && count) {
+      this.transactionService
+        .purchase(user.id, this.selectedProduct.id, count)
+        .pipe(takeUntil(this.$end))
+        .subscribe({
+          next: (transaction) => console.log(transaction),
+          error: () => console.error('Purchase not successful'),
+        });
+    } else {
+      console.error('User not found');
+    }
   }
 
   private loadAllProducts(): void {
