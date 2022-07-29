@@ -3,7 +3,7 @@
     <ion-buttons slot="end">
       <app-logout></app-logout>
     </ion-buttons>
-    <ion-title> Buy something </ion-title>
+    <ion-title> Pickerln </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,34 +11,56 @@
   <mat-stepper #stepper orientation="vertical">
     <mat-step>
       <form>
-        <ng-template matStepLabel>Artikel</ng-template>
+        <ng-template matStepLabel
+          >Artikel
+          <span *ngIf="selectedProduct"
+            >: {{selectedProduct.name}}</span
+          ></ng-template
+        >
         <section class="grid grid-cols-2 m-8 gap-5">
           <button
-            [class.border-blue-500]="isSelectedProduct(product)"
-            class="flex shadow-lg p-3 rounded-md"
+            class="flex shadow-lg p-3 rounded-md border-solid border-4 border-transparent"
+            [class.border-blue-700]="isSelectedProduct(product)"
             *ngFor="let product of allProducts"
             matStepperNext
             (click)="setSelectedProduct(product)"
           >
             <div class="flex flex-col items-start">
-              <span class="font-bold">{{product.name}}</span>
+              <span class="font-bold text-lg">{{product.name}}</span>
               <span>{{product.price | currency}}</span>
             </div>
           </button>
         </section>
       </form>
     </mat-step>
-    <mat-step [stepControl]="countFormGroup" label="Anzahl">
+    <mat-step
+      [stepControl]="countFormGroup"
+      [label]="'Anzahl: ' + getProductCount()"
+    >
       <form class="mt-10 grid grid-cols-2 gap-5" [formGroup]="countFormGroup">
         <mat-form-field appearance="fill">
           <mat-label>Count</mat-label>
-          <input matInput formControlName="count" required numeric />
+          <input
+            matInput
+            class="count-input"
+            formControlName="count"
+            required
+            numeric
+          />
         </mat-form-field>
         <div>
-          <button mat-raised-button matStepperNext color="primary">
-            Weiter
+          <button
+            class="count-button custom-button-margin"
+            mat-raised-button
+            color="primary"
+          >
+            +
+          </button>
+          <button class="count-button" mat-raised-button color="primary">
+            -
           </button>
         </div>
+        <button mat-raised-button matStepperNext color="primary">Weiter</button>
       </form>
     </mat-step>
     <mat-step>
@@ -49,8 +71,19 @@
         </mat-card-content>
       </mat-card>
       <div class="mt-5">
-        <button class="mr-10" mat-raised-button color="primary">Kaufen</button>
-        <button mat-raised-button color="warn" (click)="stepper.reset()">
+        <button
+          class="custom-button-margin count-button"
+          mat-raised-button
+          color="primary"
+        >
+          Kaufen
+        </button>
+        <button
+          class="count-button"
+          mat-raised-button
+          color="warn"
+          (click)="stepper.reset()"
+        >
           Abbrechen
         </button>
       </div>
