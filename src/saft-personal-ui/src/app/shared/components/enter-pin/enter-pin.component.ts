@@ -40,7 +40,6 @@ export class EnterPinComponent implements OnInit {
       .pipe(takeUntil(this.$end))
       .subscribe({
         next: (user) => {
-          console.log(user);
           if (user && user.id === this.user.id && !this.invalidPinError) {
             this.pinDialogRef.close(true);
           } else {

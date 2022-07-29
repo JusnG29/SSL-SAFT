@@ -44,6 +44,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   private completeLogin(user: User) {
+    this.userService.setAuthenticatedUser(user);
     this.navController.navigateRoot('/home/buy');
   }
 
