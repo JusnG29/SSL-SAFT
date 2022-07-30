@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { Subject, takeUntil } from 'rxjs';
 import { Product } from '../../openapi-generated/models';
 import { ProductService } from '../../shared/services/product.service';
@@ -41,11 +42,15 @@ export class BuyPage implements OnInit, OnDestroy {
     return this.countFormGroup.get('count').value;
   }
 
-  public setSelectedProduct(product: Product): void {
+  public setSelectedProductAndNavigate(
+    product: Product,
+    stepper: MatStepper
+  ): void {
+    // TODO: Fix two clicks needed to navigate
+    // programmatically selecting the next step does not work either
     this.selectedProduct = product;
   }
 
-  // TODO: Fix border coloring
   public isSelectedProduct(product: Product): boolean {
     if (!this.selectedProduct) return false;
 
