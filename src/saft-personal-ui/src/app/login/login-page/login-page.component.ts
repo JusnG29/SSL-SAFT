@@ -4,6 +4,8 @@ import { NavController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { User } from '../../openapi-generated/models';
 import { EnterPinComponent } from '../../shared/components/enter-pin/enter-pin.component';
+import { JwtService } from '../../shared/services/jwt.service';
+import { StorageService } from '../../shared/services/storage.service';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -19,7 +21,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly userService: UserService,
     private readonly pinDialog: MatDialog,
-    private readonly navController: NavController
+    private readonly navController: NavController,
+    private readonly storageService: StorageService,
+    private readonly jwtService: JwtService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   private completeLogin(user: User) {
     this.userService.setAuthenticatedUser(user);
+
+    // TODO: Remove once Jwt implementation is in place
+    const jwt = this.jwtService.encodeUser(user);
+    this.storageService.setUserJwt(jwt);
+
     this.navController.navigateRoot('/home/buy');
   }
 

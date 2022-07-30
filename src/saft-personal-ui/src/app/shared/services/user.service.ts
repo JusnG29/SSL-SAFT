@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of, throwError } from 'rxjs';
 import { User } from '../../openapi-generated/models';
 import { UserRestApiService } from '../../openapi-generated/services';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,10 @@ export class UserService {
   private authenticatedUser: BehaviorSubject<User | undefined> =
     new BehaviorSubject<User | undefined>(undefined);
 
-  constructor(private readonly userService: UserRestApiService) {}
+  constructor(
+    private readonly userService: UserRestApiService,
+    private readonly storageService: StorageService
+  ) {}
 
   public getAuthenticatedUser(): User | undefined {
     return this.authenticatedUser.value;
@@ -38,6 +42,7 @@ export class UserService {
 
   public logout(): void {
     this.authenticatedUser = undefined;
+    this.storageService.clearUserJwt();
   }
 
   public getTestUser(): User {
