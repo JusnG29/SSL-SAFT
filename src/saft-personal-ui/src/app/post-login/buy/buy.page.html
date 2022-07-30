@@ -53,14 +53,27 @@
             class="count-button custom-button-margin"
             mat-raised-button
             color="primary"
+            (click)="incrementCount()"
           >
             +
           </button>
-          <button class="count-button" mat-raised-button color="primary">
+          <button
+            class="count-button"
+            mat-raised-button
+            color="primary"
+            (click)="decrementCount()"
+          >
             -
           </button>
         </div>
-        <button mat-raised-button matStepperNext color="primary">Weiter</button>
+        <button
+          class="count-button"
+          mat-raised-button
+          matStepperNext
+          color="primary"
+        >
+          Weiter
+        </button>
       </form>
     </mat-step>
     <mat-step>
