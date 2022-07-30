@@ -2,5 +2,5 @@
 
 export const environment = {
   production: true,
-  saftBackendUrl: 'localhost:5000',
+  saftBackendUrl: 'http://193.122.13.227:5000',
 };
