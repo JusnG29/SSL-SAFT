@@ -1,0 +1,575 @@
+---
+openapi: 3.0.3
+info:
+  title: saft API
+  version: 1.0-SNAPSHOT
+paths:
+  /product:
+    put:
+      tags:
+      - Product Rest Api
+      summary: Update product
+      operationId: updateProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductRequest'
+      responses:
+        "200":
+          description: Product updated and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  name:
+                    type: string
+                  price:
+                    type: number
+    post:
+      tags:
+      - Product Rest Api
+      summary: Create product
+      operationId: createProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        "200":
+          description: Product created and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  name:
+                    type: string
+                  price:
+                    type: number
+  /product/all:
+    get:
+      tags:
+      - Product Rest Api
+      summary: Get all products
+      operationId: getAllProducts
+      responses:
+        "200":
+          description: All products returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /product/{id}:
+    get:
+      tags:
+      - Product Rest Api
+      summary: Get product by ID
+      operationId: getProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: Product found and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  name:
+                    type: string
+                  price:
+                    type: number
+    delete:
+      tags:
+      - Product Rest Api
+      summary: Delete product by ID
+      operationId: deleteProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: Product deleted
+          content:
+            application/json:
+              schema: {}
+  /transaction:
+    put:
+      tags:
+      - Transaction Rest Api
+      summary: Update Transaction
+      operationId: updateTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTransactionRequest'
+      responses:
+        "200":
+          description: Transaction updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  user:
+                    $ref: '#/components/schemas/User'
+                  product:
+                    $ref: '#/components/schemas/Product'
+                  purchaseDate:
+                    format: date
+                    type: string
+                  value:
+                    type: number
+                  amount:
+                    format: int32
+                    type: integer
+    post:
+      tags:
+      - Transaction Rest Api
+      summary: Create transaction
+      operationId: createTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransactionRequest'
+      responses:
+        "200":
+          description: Transaction created and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  user:
+                    $ref: '#/components/schemas/User'
+                  product:
+                    $ref: '#/components/schemas/Product'
+                  purchaseDate:
+                    format: date
+                    type: string
+                  value:
+                    type: number
+                  amount:
+                    format: int32
+                    type: integer
+  /transaction/all:
+    get:
+      tags:
+      - Transaction Rest Api
+      summary: Get all transactions
+      operationId: getAllTransactions
+      responses:
+        "200":
+          description: All transactions returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+  /transaction/getUserHistory:
+    post:
+      tags:
+      - Transaction Rest Api
+      summary: Get transaction-history for user by ID
+      operationId: getUserHistory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetUserHistoryRequest'
+      responses:
+        "200":
+          description: Transaction-history for user returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+  /transaction/purchase:
+    post:
+      tags:
+      - Transaction Rest Api
+      summary: User purchases a product
+      operationId: purchase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseRequest'
+      responses:
+        "200":
+          description: Product purchased and transaction created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  user:
+                    $ref: '#/components/schemas/User'
+                  product:
+                    $ref: '#/components/schemas/Product'
+                  purchaseDate:
+                    format: date
+                    type: string
+                  value:
+                    type: number
+                  amount:
+                    format: int32
+                    type: integer
+  /transaction/{id}:
+    get:
+      tags:
+      - Transaction Rest Api
+      summary: Get Transaction by ID
+      operationId: getTransaction
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: Transaction found and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  user:
+                    $ref: '#/components/schemas/User'
+                  product:
+                    $ref: '#/components/schemas/Product'
+                  purchaseDate:
+                    format: date
+                    type: string
+                  value:
+                    type: number
+                  amount:
+                    format: int32
+                    type: integer
+    delete:
+      tags:
+      - Transaction Rest Api
+      summary: Delete Transaction by ID
+      operationId: deleteTransaction
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: Transaction deleted
+          content:
+            application/json:
+              schema: {}
+  /user:
+    put:
+      tags:
+      - User Rest Api
+      summary: Update user
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        "200":
+          description: User was updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  passcode:
+                    type: string
+                  couleurName:
+                    type: string
+                  balance:
+                    type: number
+    post:
+      tags:
+      - User Rest Api
+      summary: Create user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        "200":
+          description: User was created and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  passcode:
+                    type: string
+                  couleurName:
+                    type: string
+                  balance:
+                    type: number
+  /user/all:
+    get:
+      tags:
+      - User Rest Api
+      summary: Get all users
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: All users returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /user/balance:
+    post:
+      tags:
+      - User Rest Api
+      summary: Get balance for user by ID
+      operationId: balance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BalanceRequest'
+      responses:
+        "200":
+          description: User was found and balance returned
+          content:
+            application/json:
+              schema:
+                type: number
+  /user/init:
+    post:
+      tags:
+      - User Rest Api
+      responses:
+        "200":
+          description: OK
+  /user/login:
+    post:
+      tags:
+      - User Rest Api
+      summary: Login for user
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        "200":
+          description: User was logged in
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  passcode:
+                    type: string
+                  couleurName:
+                    type: string
+                  balance:
+                    type: number
+  /user/{id}:
+    get:
+      tags:
+      - User Rest Api
+      summary: Get user by ID
+      operationId: getUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: User was found and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UUID'
+                  passcode:
+                    type: string
+                  couleurName:
+                    type: string
+                  balance:
+                    type: number
+    delete:
+      tags:
+      - User Rest Api
+      summary: Delete user by ID
+      operationId: deleteUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: User was deleted
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    BalanceRequest:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+    CreateProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+    CreateTransactionRequest:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/UUID'
+        productId:
+          $ref: '#/components/schemas/UUID'
+        value:
+          type: number
+        amount:
+          format: int32
+          type: integer
+    CreateUserRequest:
+      type: object
+      properties:
+        couleurName:
+          type: string
+        passcode:
+          type: string
+    GetUserHistoryRequest:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/UUID'
+    LoginRequest:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        passcode:
+          type: string
+    Product:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+        price:
+          type: number
+    PurchaseRequest:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/UUID'
+        productId:
+          $ref: '#/components/schemas/UUID'
+        value:
+          type: number
+        amount:
+          format: int32
+          type: integer
+    Transaction:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        user:
+          $ref: '#/components/schemas/User'
+        product:
+          $ref: '#/components/schemas/Product'
+        purchaseDate:
+          format: date
+          type: string
+        value:
+          type: number
+        amount:
+          format: int32
+          type: integer
+    UUID:
+      format: uuid
+      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      type: string
+    UpdateProductRequest:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+    UpdateTransactionRequest:
+      type: object
+      properties:
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    UpdateUserRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        passcode:
+          type: string
+        couleurName:
+          type: string
+        balance:
+          type: number

@@ -9,7 +9,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "ng-openapi-gen": "ng-openapi-gen --input ./src/openapi/openapi-saft --output ./src/app/openapi-generated",
+    "ng-openapi-gen-remote": "ng-openapi-gen --input ./src/openapi/openapi-saft --output ./src/app/openapi-generated"
   },
   "private": true,
   "dependencies": {
@@ -62,6 +64,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-openapi-gen": "^0.21.2",
     "protractor": "~7.0.0",
     "tailwindcss": "^3.1.6",
     "ts-node": "~8.3.0",
