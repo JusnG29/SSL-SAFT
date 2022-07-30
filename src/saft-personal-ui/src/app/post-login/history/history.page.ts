@@ -20,12 +20,12 @@ export class HistoryPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const user = this.userService.getAuthenticatedUser();
-
     if (user) {
       this.transactionService
-        .getUserHistory(user.id)
+        .getUserHistory$()
         .pipe(takeUntil(this.$end))
         .subscribe({ next: (transactions) => (this.history = transactions) });
+      this.transactionService.loadTransactions(user.id);
     }
   }
 
