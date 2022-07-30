@@ -1,0 +1,25 @@
+<form [formGroup]="loginForm" class="flex flex-col">
+  <mat-form-field appearance="fill">
+    <input
+      matInput
+      placeholder="Passcode"
+      formControlName="passCode"
+      type="password"
+      inputmode="numeric"
+      required
+    />
+  </mat-form-field>
+
+  <div class="text-red-600" [class.invisible]="!invalidPinError">
+    Invalid PIN
+  </div>
+
+  <button
+    mat-raised-button
+    [disabled]="loginForm.invalid || invalidPinError"
+    (click)="tryReturnToView()"
+    color="primary"
+  >
+    Login
+  </button>
+</form>

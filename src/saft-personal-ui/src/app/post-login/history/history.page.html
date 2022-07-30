@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <app-logout></app-logout>
+    </ion-buttons>
+    <ion-title> History </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section>
+    <mat-card class="m-5" *ngFor="let transaction of history"
+      ><mat-card-title class="text-base"
+        >{{transaction.amount}} x {{transaction.product.name}}</mat-card-title
+      ><mat-card-subtitle>
+        <div class="flex justify-between">
+          <span>{{transaction.value * transaction.amount | currency}}</span>
+          <span class="text-xs"
+            >{{transaction.purchaseDate | date:'dd.MM.yyyy'}}</span
+          >
+        </div></mat-card-subtitle
+      ></mat-card
+    >
+  </section>
+</ion-content>

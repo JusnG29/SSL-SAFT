@@ -1,0 +1,106 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <app-logout></app-logout>
+    </ion-buttons>
+    <ion-title> Pickerln </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <mat-stepper linear="true" #stepper orientation="vertical">
+    <mat-step [completed]="selectedProduct != undefined">
+      <form>
+        <ng-template matStepLabel
+          >Artikel
+          <span *ngIf="selectedProduct"
+            >: {{selectedProduct.name}}</span
+          ></ng-template
+        >
+        <section class="grid grid-cols-2 m-8 gap-5">
+          <button
+            class="flex shadow-lg p-3 rounded-md border-solid border-4 border-transparent"
+            [class.border-blue-700]="isSelectedProduct(product)"
+            *ngFor="let product of allProducts"
+            (click)="setSelectedProductAndNavigate(product, stepper)"
+            matStepperNext
+          >
+            <div class="flex flex-col items-start">
+              <span class="font-bold text-lg">{{product.name}}</span>
+              <span>{{product.price | currency}}</span>
+            </div>
+          </button>
+        </section>
+      </form>
+    </mat-step>
+    <mat-step
+      [stepControl]="countFormGroup"
+      [label]="'Anzahl: ' + getProductCount()"
+    >
+      <form class="mt-10 grid grid-cols-2 gap-5" [formGroup]="countFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Count</mat-label>
+          <input
+            matInput
+            class="count-input"
+            formControlName="count"
+            required
+            numeric
+          />
+        </mat-form-field>
+        <div>
+          <button
+            class="count-button custom-button-margin"
+            mat-raised-button
+            color="primary"
+            (click)="incrementCount()"
+          >
+            +
+          </button>
+          <button
+            class="count-button"
+            mat-raised-button
+            color="primary"
+            (click)="decrementCount()"
+          >
+            -
+          </button>
+        </div>
+        <button
+          class="count-button"
+          mat-raised-button
+          matStepperNext
+          color="primary"
+        >
+          Weiter
+        </button>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Kaufen</ng-template>
+      <mat-card class="mt-5">
+        <mat-card-content>
+          {{selectedProduct?.name}} x {{getProductCount()}}
+        </mat-card-content>
+      </mat-card>
+      <div class="mt-5">
+        <button
+          class="custom-button-margin count-button"
+          mat-raised-button
+          color="primary"
+          (click)="initializePurchase(stepper)"
+        >
+          Kaufen
+        </button>
+        <button
+          class="count-button"
+          mat-raised-button
+          color="warn"
+          (click)="stepper.reset(); countFormGroup.get('count').setValue(1);"
+        >
+          Abbrechen
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</ion-content>

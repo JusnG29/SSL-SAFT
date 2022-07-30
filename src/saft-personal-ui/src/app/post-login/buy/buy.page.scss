@@ -1,0 +1,13 @@
+// apparently tailwind cannot override material stylings
+.custom-button-margin {
+  margin-right: 1.25rem;
+}
+
+.count-button {
+  height: 3rem;
+  font-size: medium;
+}
+
+.count-input {
+  font-size: large;
+}

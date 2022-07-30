@@ -1,0 +1,10 @@
+<section class="flex h-screen flex-col p-10">
+  <mat-card *ngIf="allUsers.length === 0">Keine Bundesbrüder gefunden</mat-card>
+  <mat-card
+    class="mb-3"
+    *ngFor="let user of allUsers"
+    (click)="openPinDialog(user)"
+  >
+    <mat-card-content>{{ user.couleurName }}</mat-card-content>
+  </mat-card>
+</section>
