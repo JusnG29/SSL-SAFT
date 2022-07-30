@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Subject, takeUntil } from 'rxjs';
-import { Product } from '../../openapi-generated/models';
+import { Product, Transaction } from '../../openapi-generated/models';
 import { ProductService } from '../../shared/services/product.service';
 import { TransactionService } from '../../shared/services/transaction.service';
 import { UserService } from '../../shared/services/user.service';
@@ -57,7 +57,7 @@ export class BuyPage implements OnInit, OnDestroy {
     return product.id === this.selectedProduct.id;
   }
 
-  public initializePurchase(): void {
+  public initializePurchase(stepper: MatStepper): void {
     const user = this.userService.getAuthenticatedUser();
     const count = this.countFormGroup.get('count').value;
 
@@ -66,12 +66,18 @@ export class BuyPage implements OnInit, OnDestroy {
         .purchase(user.id, this.selectedProduct.id, count)
         .pipe(takeUntil(this.$end))
         .subscribe({
-          next: (transaction) => console.log(transaction),
+          next: (transaction) => this.completePurchase(stepper),
           error: () => console.error('Purchase not successful'),
         });
     } else {
       console.error('User not found');
     }
+  }
+
+  private completePurchase(stepper: MatStepper): void {
+    stepper.reset();
+    this.countFormGroup.get('count').setValue(1);
+    this.selectedProduct = undefined;
   }
 
   private loadAllProducts(): void {
