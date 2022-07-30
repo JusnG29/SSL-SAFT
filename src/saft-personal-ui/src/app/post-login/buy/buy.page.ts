@@ -57,6 +57,20 @@ export class BuyPage implements OnInit, OnDestroy {
     return product.id === this.selectedProduct.id;
   }
 
+  public incrementCount(i: number = 1): void {
+    const countControl = this.countFormGroup.get('count');
+
+    countControl.setValue(countControl.value + i);
+  }
+
+  public decrementCount(i: number = 1): void {
+    const countControl = this.countFormGroup.get('count');
+
+    if (countControl.value - i < 1) return;
+
+    countControl.setValue(countControl.value - i);
+  }
+
   public initializePurchase(stepper: MatStepper): void {
     const user = this.userService.getAuthenticatedUser();
     const count = this.countFormGroup.get('count').value;
