@@ -35,6 +35,14 @@ There are two ways to get insights into the local dev database:
 - Connect via IDE or dedicated tool such as [pgAdmin](https://www.pgadmin.org/)
   - Use same credentials as above
 
+### Seed database
+
+To fill some testing data into the database, call the following endpoint:
+
+```text
+POST /user/init
+```
+
 ### Angular: Generate OpenAPI clients
 
 Inside `/src/saft-personal-ui` execute:
