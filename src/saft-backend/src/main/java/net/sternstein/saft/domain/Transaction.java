@@ -3,6 +3,8 @@ package net.sternstein.saft.domain;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,12 +16,9 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name="userId", nullable=false)
     private User user;
-    @ManyToOne
-    @JoinColumn(name="productId", nullable=false)
-    private Product product;
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Purchase> purchaseList;
     private LocalDate purchaseDate;
-    private BigDecimal value;
-    private int amount;
 
     public Transaction() {
     }
@@ -27,10 +26,8 @@ public class Transaction {
     public Transaction(User user, Product product, BigDecimal value, int amount) {
         this.id = UUID.randomUUID();
         this.user = user;
-        this.product = product;
+        purchaseList = new ArrayList<>();
         this.purchaseDate = LocalDate.now();
-        this.value = value;
-        this.amount = amount;
     }
 
     public UUID getId() {
@@ -49,12 +46,8 @@ public class Transaction {
         this.user = user;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
+    public List<Purchase> getPurchaseList() {
+        return purchaseList;
     }
 
     public LocalDate getPurchaseDate() {
@@ -65,32 +58,25 @@ public class Transaction {
         this.purchaseDate = purchaseDate;
     }
 
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Transaction that = (Transaction) o;
-        return amount == that.amount && Objects.equals(id, that.id) && Objects.equals(user, that.user) && Objects.equals(product, that.product) && Objects.equals(purchaseDate, that.purchaseDate) && Objects.equals(value, that.value);
+
+        if (!id.equals(that.id)) return false;
+        if (!user.equals(that.user)) return false;
+        if (!purchaseList.equals(that.purchaseList)) return false;
+        return purchaseDate.equals(that.purchaseDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, product, purchaseDate, value, amount);
+        int result = id.hashCode();
+        result = 31 * result + user.hashCode();
+        result = 31 * result + purchaseList.hashCode();
+        result = 31 * result + purchaseDate.hashCode();
+        return result;
     }
 }
