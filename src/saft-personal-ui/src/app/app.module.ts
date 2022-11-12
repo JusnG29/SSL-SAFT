@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -23,7 +23,13 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     ApiModule.forRoot({ rootUrl: environment.saftBackendUrl }),
     IonicStorageModule.forRoot(),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: LOCALE_ID,
+      useValue: 'de-DE', // 'de-DE' for Germany, 'fr-FR' for France ...
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

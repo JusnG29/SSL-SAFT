@@ -2,6 +2,7 @@ package net.sternstein.saft.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Transaction {
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Purchase> purchaseList;
     private BigDecimal totalValue;
-    private LocalDate purchaseDate;
+    private Instant purchaseDate;
 
     public Transaction() {
     }
@@ -28,7 +29,7 @@ public class Transaction {
         this.user = user;
         this.purchaseList = new ArrayList<>();
         this.totalValue = BigDecimal.ZERO;
-        this.purchaseDate = LocalDate.now();
+        this.purchaseDate = Instant.now();
     }
 
     public UUID getId() {
@@ -51,11 +52,11 @@ public class Transaction {
         return purchaseList;
     }
 
-    public LocalDate getPurchaseDate() {
+    public Instant getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDate purchaseDate) {
+    public void setPurchaseDate(Instant purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 

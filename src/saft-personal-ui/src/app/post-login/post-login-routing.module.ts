@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CheckoutPage } from './buy/checkout/checkout.page';
 import { PostLoginPage } from './post-login.page';
 
 const routes: Routes = [

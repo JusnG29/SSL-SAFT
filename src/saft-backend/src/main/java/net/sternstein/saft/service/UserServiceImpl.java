@@ -73,18 +73,33 @@ public class UserServiceImpl implements UserService {
     public void init() {
         User odin = new User("Odin", "1234");
         User sky = new User("Skywalker", "0815");
-        Product bier = new Product("Bier", BigDecimal.ONE);
-        Product eiskaffe = new Product("Eiskaffe", BigDecimal.valueOf(1.2));
+        Product seiterl = new Product("Bier", BigDecimal.ONE, "#fcba03", "0,33 l");
+        Product halbe = new Product("Bier", BigDecimal.valueOf(1.3), "#fcba03", "0,5 l");
+        Product wein = new Product("Wein", BigDecimal.valueOf(1.2), "#fcba03", "0,75 l");
+        Product anti = new Product("Anti", BigDecimal.valueOf(1.2), "#4bc22b", "0,5 l");
+        Product eiskaffe = new Product("Eiskaffee", BigDecimal.valueOf(1.2), "#4bc22b", "0,25 l");
+        Product pizza = new Product("Pizza", BigDecimal.valueOf(2), "#2ba6c2", "1 Stk.");
+        Product knabber = new Product("Knabberei", BigDecimal.valueOf(2), "#2ba6c2", "1 Stk.");
+        Product schoko = new Product("Schoko", BigDecimal.valueOf(0.7), "#2ba6c2", "1 Stk.");
+        Product something = new Product("Product X", BigDecimal.valueOf(0.1), "#000000", "1 Stk.");
+
 
         userRepository.persist(odin);
         userRepository.persist(sky);
-        productRepository.persist(bier);
+        productRepository.persist(seiterl);
+        productRepository.persist(halbe);
+        productRepository.persist(wein);
+        productRepository.persist(anti);
         productRepository.persist(eiskaffe);
+        productRepository.persist(pizza);
+        productRepository.persist(knabber);
+        productRepository.persist(schoko);
+        productRepository.persist(something);
 
         List<PurchaseDTO> purchaseOdin = List.of(new PurchaseDTO(eiskaffe.getId(), 5));
         List<PurchaseDTO> purchaseSky = List.of(
-                new PurchaseDTO(bier.getId(), 10),
-                new PurchaseDTO(bier.getId(), 2)
+                new PurchaseDTO(halbe.getId(), 10),
+                new PurchaseDTO(halbe.getId(), 2)
         );
 
         transactionService.executeTransaction(odin.getId(), purchaseOdin);

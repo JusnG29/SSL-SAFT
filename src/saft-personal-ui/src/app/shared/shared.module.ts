@@ -7,9 +7,11 @@ import { MatInputModule } from '@angular/material/input';
 import { EnterPinComponent } from './components/enter-pin/enter-pin.component';
 import { MatButtonModule } from '@angular/material/button';
 import { LogoutComponent } from './components/logout/logout.component';
+import { IonicModule } from '@ionic/angular';
+import { DefaultHeaderComponent } from './components/default-header/default-header.component';
 
 @NgModule({
-  declarations: [EnterPinComponent, LogoutComponent],
+  declarations: [EnterPinComponent, LogoutComponent, DefaultHeaderComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -17,7 +19,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    IonicModule.forRoot(),
   ],
-  exports: [MatCardModule, LogoutComponent],
+  exports: [MatCardModule, LogoutComponent, DefaultHeaderComponent],
 })
 export class SharedModule {}

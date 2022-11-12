@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <app-logout></app-logout>
+    </ion-buttons>
+    <ion-title>
+      <div class="flex justify-between items-center">
+        <ion-img
+          class="saft-icon-logged-in"
+          src="../../../assets/SAFT_Logo_4.png"
+        ></ion-img>
+        {{ user?.couleurName }}
+        <!-- Empty span to simulate third item -->
+        <span></span>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
-import { Transaction } from '../../openapi-generated/models';
+import {
+  Product,
+  PurchaseDto,
+  Transaction,
+} from '../../openapi-generated/models';
 import { TransactionRestApiService } from '../../openapi-generated/services';
 
 @Injectable({
@@ -15,8 +19,24 @@ export class TransactionService {
     private readonly transactionRestService: TransactionRestApiService
   ) {}
 
-  public getUserHistory$(): Observable<Transaction[]> {
-    return this.transactions$.asObservable();
+  public executeTransaction(
+    userId: string,
+    basket: Map<Product, number>
+  ): Observable<Transaction> {
+    let purchases: PurchaseDto[] = [];
+
+    basket.forEach((value: number, key: Product) => {
+      purchases.push({
+        productId: key.id,
+        amount: value,
+      });
+    });
+
+    return this.transactionRestService
+      .executeTransaction$Response({
+        body: { userId: userId, purchaseDTOList: purchases },
+      })
+      .pipe(map((value) => value.body));
   }
 
   public loadTransactions(userId: string): void {
@@ -32,25 +52,7 @@ export class TransactionService {
       });
   }
 
-  public purchase(
-    userId: string,
-    productId: string,
-    amount: number
-  ): Observable<Transaction> {
-    // TODO: Dynamic price
-    return this.transactionRestService
-      .purchase$Response({ body: { userId, productId, amount, value: 3.5 } })
-      .pipe(
-        map((response) => response.body),
-        tap((response) => {
-          this.appendTransaction(response);
-        })
-      );
-  }
-
-  private appendTransaction(transaction: Transaction) {
-    const currentTransactions = this.transactions$.value;
-
-    this.transactions$.next([...currentTransactions, transaction]);
+  public getUserHistory$(): Observable<Transaction[]> {
+    return this.transactions$.asObservable();
   }
 }
