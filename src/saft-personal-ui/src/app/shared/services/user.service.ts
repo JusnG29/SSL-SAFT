@@ -20,6 +20,10 @@ export class UserService {
     return this.authenticatedUser.value;
   }
 
+  public getAuthenticatedUser$(): Observable<User | undefined> {
+    return this.authenticatedUser.asObservable();
+  }
+
   public setAuthenticatedUser(user: User): void {
     this.authenticatedUser.next(user);
   }

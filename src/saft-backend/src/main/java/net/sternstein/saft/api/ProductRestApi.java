@@ -34,7 +34,12 @@ public class ProductRestApi implements ProductApi {
             )})
     @Override
     public Response createProduct(CreateProductRequest request) {
-        var product = productService.createProduct(request.name(), request.price());
+        var product = productService.createProduct(
+                request.name(),
+                request.price(),
+                request.colorCode(),
+                request.description()
+        );
         return Response.ok().entity(product).build();
     }
 

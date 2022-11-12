@@ -14,14 +14,20 @@ public class Product {
     @Column(length = 100)
     private String name;
     private BigDecimal price;
+    private String description;
+
+    @Column(length = 7)
+    private String colorCode;
 
     public Product() {
     }
 
-    public Product(String name, BigDecimal price) {
+    public Product(String name, BigDecimal price, String colorCode, String description) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.price = price;
+        this.colorCode = colorCode;
+        this.description = description;
     }
 
     public UUID getId() {
@@ -46,6 +52,22 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
