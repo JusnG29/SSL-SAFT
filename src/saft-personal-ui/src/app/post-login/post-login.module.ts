@@ -7,6 +7,7 @@ import { PostLoginRoutingModule } from './post-login-routing.module';
 
 import { PostLoginPage } from './post-login.page';
 import { SharedModule } from '../shared/shared.module';
+import { CheckoutPage } from './buy/checkout/checkout.page';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { SharedModule } from '../shared/shared.module';
     PostLoginRoutingModule,
     SharedModule,
   ],
-  declarations: [PostLoginPage],
+  declarations: [PostLoginPage, CheckoutPage],
 })
 export class PostLoginModule {}

@@ -1,0 +1,68 @@
+<app-default-header></app-default-header>
+
+<ion-content fullscreen="true">
+  <section>
+    <div
+      class="fixed w-full top-14 flex justify-between p-3 px-7 bg-slate-200 font-bold z-50"
+    >
+      Kontostand:
+      <span>{{user?.balance | currency: 'EUR'}}</span>
+    </div>
+    <div class="mt-20 px-7">
+      <span class="font-bold"
+        >Kauf {{(checkoutIsFinished && !hasError)? 'abgeschlossen' :
+        'abschließen'}}:</span
+      >
+
+      <div class="mt-4">
+        <div
+          *ngFor="let item of basket | keyvalue"
+          class="flex justify-between"
+        >
+          <span
+            >{{item.value}}x {{item.key.name}} ({{item.key.description}})</span
+          >
+          <span>{{item.value * item.key.price | currency:'EUR'}}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-bold">Gesamt</span>
+          <span class="font-bold">{{basketPrice | currency:'EUR'}}</span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex flex-col items-center mt-6"
+      *ngIf="!checkoutIsFinished; else checkoutFinished"
+    >
+      <button
+        class="w-4/5 bg-slate-600 py-3 rounded-sm text-white flex justify-center"
+        (click)="finishCheckout()"
+      >
+        Bestätigen
+        <ion-icon class="text-base ml-1" icon="checkmark-circle"></ion-icon>
+      </button>
+      <button
+        class="w-4/5 bg-red-500 py-3 rounded-sm text-white mt-3 flex justify-center"
+        (click)="abortCheckout()"
+      >
+        Kauf korrigieren
+        <ion-icon class="text-base ml-1" icon="trash"></ion-icon>
+      </button>
+    </div>
+    <ng-template #checkoutFinished>
+      <div *ngIf="!hasError" class="flex flex-col w-full mt-10 items-center">
+        <ion-icon
+          icon="checkmark-circle"
+          class="text-6xl text-green-600"
+        ></ion-icon>
+        <button
+          class="w-4/5 bg-slate-600 py-3 rounded-sm text-white flex justify-center mt-5"
+          (click)="abortCheckout()"
+        >
+          Zurück zu Artikel
+        </button>
+      </div>
+      <div *ngIf="hasError">error!</div>
+    </ng-template>
+  </section>
+</ion-content>

@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
-    public Product createProduct(String name, BigDecimal price) {
-        var product = new Product(name, price);
+    public Product createProduct(String name, BigDecimal price, String colorCode, String description) {
+        var product = new Product(name, price, colorCode, description);
 
         productRepository.persist(product);
 

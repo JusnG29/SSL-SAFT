@@ -15,7 +15,6 @@ export class StorageService {
   }
 
   public setUserJwt(jwt: string): void {
-    console.log(jwt);
     this._storage.set(this.JWT_KEY, jwt);
   }
 
