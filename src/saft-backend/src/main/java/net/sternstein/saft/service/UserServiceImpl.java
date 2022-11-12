@@ -4,8 +4,8 @@ import io.quarkus.hibernate.orm.panache.Panache;
 import net.sternstein.saft.domain.Product;
 import net.sternstein.saft.domain.Transaction;
 import net.sternstein.saft.domain.User;
+import net.sternstein.saft.model.dto.transaction.PurchaseDTO;
 import net.sternstein.saft.persistence.ProductRepository;
-import net.sternstein.saft.persistence.TransactionRepository;
 import net.sternstein.saft.persistence.UserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll().stream().toList();
+        return userRepository.listAll();
     }
 
     @Override
@@ -62,27 +62,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Inject
-    TransactionRepository transactionRepository;
-    @Inject
     ProductRepository productRepository;
     @Inject
     TransactionService transactionService;
+    @Inject
+    PurchaseService purchaseService;
 
     @Override
     // TODO: remove! only for local dev
     public void init() {
         User odin = new User("Odin", "1234");
-        User lego = new User("Skywalker", "0815");
+        User sky = new User("Skywalker", "0815");
         Product bier = new Product("Bier", BigDecimal.ONE);
         Product eiskaffe = new Product("Eiskaffe", BigDecimal.valueOf(1.2));
 
         userRepository.persist(odin);
-        userRepository.persist(lego);
+        userRepository.persist(sky);
         productRepository.persist(bier);
         productRepository.persist(eiskaffe);
 
-        transactionService.purchase(odin.getId(), eiskaffe.getId(), eiskaffe.getPrice(), 5);
-        transactionService.purchase(lego.getId(), bier.getId(), bier.getPrice(), 10);
-        transactionService.purchase(lego.getId(), bier.getId(), bier.getPrice(), 2);
+        List<PurchaseDTO> purchaseOdin = List.of(new PurchaseDTO(eiskaffe.getId(), 5));
+        List<PurchaseDTO> purchaseSky = List.of(
+                new PurchaseDTO(bier.getId(), 10),
+                new PurchaseDTO(bier.getId(), 2)
+        );
+
+        Transaction transaction1 = transactionService.executeTransaction(odin.getId(), purchaseOdin);
+        Transaction transaction2 = transactionService.executeTransaction(sky.getId(), purchaseSky);
+
+        purchaseService.createPurchase(transaction1.getId(), eiskaffe.getId(), eiskaffe.getPrice(), 5);
+        purchaseService.createPurchase(transaction2.getId(), bier.getId(), bier.getPrice(), 10);
+        purchaseService.createPurchase(transaction2.getId(), bier.getId(), bier.getPrice(), 2);
     }
 }

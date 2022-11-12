@@ -1,5 +1,6 @@
 package net.sternstein.saft.domain;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,6 +13,7 @@ public class Purchase {
 
     @Id
     private UUID id;
+    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "transactionId", nullable = false)
     private Transaction transaction;

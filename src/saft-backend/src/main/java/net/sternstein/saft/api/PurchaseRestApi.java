@@ -1,7 +1,6 @@
 package net.sternstein.saft.api;
 
 import net.sternstein.saft.domain.Purchase;
-import net.sternstein.saft.domain.Transaction;
 import net.sternstein.saft.model.dto.purchase.CreatePurchaseRequest;
 import net.sternstein.saft.model.dto.purchase.UpdatePurchaseRequest;
 import net.sternstein.saft.service.PurchaseService;

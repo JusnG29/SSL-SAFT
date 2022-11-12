@@ -35,7 +35,7 @@ public class TransactionRestApi implements TransactionApi {
             )})
     @Override
     public Response createTransaction(CreateTransactionRequest request) {
-        var transaction = transactionService.createTransaction(request.userId(), request.productId(), request.value(), request.amount());
+        var transaction = transactionService.createTransaction(request.userId());
         return Response.ok().entity(transaction).build();
     }
 
@@ -126,8 +126,8 @@ public class TransactionRestApi implements TransactionApi {
                     responseCode = "200"
             )})
     @Override
-    public Response purchase(PurchaseRequest request) {
-        var transaction = transactionService.purchase(request.userId(), request.productId(), request.value(), request.amount());
+    public Response executeTransaction(ExecuteTransactionRequest request) {
+        var transaction = transactionService.executeTransaction(request.userId(), request.purchaseDTOList());
         return Response.ok().entity(transaction).build();
     }
 
