@@ -87,11 +87,7 @@ public class UserServiceImpl implements UserService {
                 new PurchaseDTO(bier.getId(), 2)
         );
 
-        Transaction transaction1 = transactionService.executeTransaction(odin.getId(), purchaseOdin);
-        Transaction transaction2 = transactionService.executeTransaction(sky.getId(), purchaseSky);
-
-        purchaseService.createPurchase(transaction1.getId(), eiskaffe.getId(), eiskaffe.getPrice(), 5);
-        purchaseService.createPurchase(transaction2.getId(), bier.getId(), bier.getPrice(), 10);
-        purchaseService.createPurchase(transaction2.getId(), bier.getId(), bier.getPrice(), 2);
+        transactionService.executeTransaction(odin.getId(), purchaseOdin);
+        transactionService.executeTransaction(sky.getId(), purchaseSky);
     }
 }
