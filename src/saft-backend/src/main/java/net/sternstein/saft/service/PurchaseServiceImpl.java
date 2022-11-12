@@ -4,6 +4,7 @@ import io.quarkus.hibernate.orm.panache.Panache;
 import net.sternstein.saft.domain.Product;
 import net.sternstein.saft.domain.Purchase;
 import net.sternstein.saft.domain.Transaction;
+import net.sternstein.saft.model.dto.transaction.PurchaseDTO;
 import net.sternstein.saft.persistence.ProductRepository;
 import net.sternstein.saft.persistence.PurchaseRepository;
 import net.sternstein.saft.persistence.TransactionRepository;
@@ -11,8 +12,10 @@ import net.sternstein.saft.persistence.TransactionRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class PurchaseServiceImpl implements PurchaseService {
@@ -42,7 +45,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public List<Purchase> getAllPurchases() {
-        return purchaseRepository.findAll().stream().toList();
+        return purchaseRepository.listAll();
     }
 
     @Override
@@ -53,5 +56,22 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public void deletePurchase(UUID id) {
         purchaseRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Purchase> createFromDtoList(Transaction transaction, List<PurchaseDTO> purchaseDTOList) {
+        List<Purchase> purchaseList = purchaseDTOList.stream().map(dto -> transformFromDto(transaction, dto)).collect(Collectors.toList());
+        purchaseRepository.persist(purchaseList);
+        return purchaseList;
+    }
+
+    @Override
+    public BigDecimal calculateTotalValue(List<Purchase> purchaseList) {
+        return purchaseList.stream().map(purchase -> purchase.getValue().multiply(BigDecimal.valueOf(purchase.getAmount()))).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private Purchase transformFromDto(Transaction transaction, PurchaseDTO purchaseDTO) {
+        Product product = productRepository.findById(purchaseDTO.productId());
+        return new Purchase(transaction, product, product.getPrice(), purchaseDTO.amount());
     }
 }
