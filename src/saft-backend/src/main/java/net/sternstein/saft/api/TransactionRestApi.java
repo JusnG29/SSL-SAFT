@@ -113,13 +113,13 @@ public class TransactionRestApi implements TransactionApi {
     }
 
     @POST
-    @Path("purchase")
+    @Path("executeTransaction")
     @Transactional
-    @Operation(summary = "User purchases a product", operationId = "purchase")
+    @Operation(summary = "User executes a transaction", operationId = "executeTransaction")
     @APIResponses({
             @APIResponse(
                     name = "Success",
-                    description = "Product purchased and transaction created",
+                    description = "Purchases created and transaction executed",
                     content = @Content(
                             schema = @Schema(type = SchemaType.OBJECT, implementation = Transaction.class),
                             mediaType = MediaType.APPLICATION_JSON),

@@ -60,18 +60,20 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Transaction executeTransaction(UUID userId, List<PurchaseDTO> purchaseDTOList) {
 
-        var transaction = createTransaction(userId);
+        Transaction transaction = createTransaction(userId);
 
         List<Purchase> purchaseList = purchaseService.createFromDtoList(transaction, purchaseDTOList);
         purchaseRepository.persist(purchaseList);
 
+        BigDecimal totalValue = purchaseService.calculateTotalValue(purchaseList);
+
+        transaction.setTotalValue(totalValue);
         User user = userRepository.findById(userId);
-        BigDecimal newBalance = user.getBalance().subtract(purchaseService.calculateTotalValue(purchaseList));
+        BigDecimal newBalance = user.getBalance().subtract(totalValue);
         user.setBalance(newBalance);
 
         Panache.getEntityManager().merge(user);
-
-        return transaction;
+        return Panache.getEntityManager().merge(transaction);
     }
 
     @Override
