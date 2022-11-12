@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -18,15 +17,17 @@ public class Transaction {
     private User user;
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Purchase> purchaseList;
+    private BigDecimal totalValue;
     private LocalDate purchaseDate;
 
     public Transaction() {
     }
 
-    public Transaction(User user, Product product, BigDecimal value, int amount) {
+    public Transaction(User user) {
         this.id = UUID.randomUUID();
         this.user = user;
-        purchaseList = new ArrayList<>();
+        this.purchaseList = new ArrayList<>();
+        this.totalValue = BigDecimal.ZERO;
         this.purchaseDate = LocalDate.now();
     }
 
@@ -58,6 +59,14 @@ public class Transaction {
         this.purchaseDate = purchaseDate;
     }
 
+    public BigDecimal getTotalValue() {
+        return totalValue;
+    }
+
+    public void setTotalValue(BigDecimal totalValue) {
+        this.totalValue = totalValue;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,18 +74,20 @@ public class Transaction {
 
         Transaction that = (Transaction) o;
 
-        if (!id.equals(that.id)) return false;
-        if (!user.equals(that.user)) return false;
-        if (!purchaseList.equals(that.purchaseList)) return false;
-        return purchaseDate.equals(that.purchaseDate);
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        if (purchaseList != null ? !purchaseList.equals(that.purchaseList) : that.purchaseList != null) return false;
+        if (totalValue != null ? !totalValue.equals(that.totalValue) : that.totalValue != null) return false;
+        return purchaseDate != null ? purchaseDate.equals(that.purchaseDate) : that.purchaseDate == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + user.hashCode();
-        result = 31 * result + purchaseList.hashCode();
-        result = 31 * result + purchaseDate.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (purchaseList != null ? purchaseList.hashCode() : 0);
+        result = 31 * result + (totalValue != null ? totalValue.hashCode() : 0);
+        result = 31 * result + (purchaseDate != null ? purchaseDate.hashCode() : 0);
         return result;
     }
 }

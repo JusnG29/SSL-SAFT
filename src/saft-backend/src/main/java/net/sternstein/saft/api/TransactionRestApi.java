@@ -3,7 +3,7 @@ package net.sternstein.saft.api;
 import net.sternstein.saft.domain.Transaction;
 import net.sternstein.saft.model.dto.transaction.CreateTransactionRequest;
 import net.sternstein.saft.model.dto.transaction.GetUserHistoryRequest;
-import net.sternstein.saft.model.dto.transaction.PurchaseRequest;
+import net.sternstein.saft.model.dto.transaction.ExecuteTransactionRequest;
 import net.sternstein.saft.model.dto.transaction.UpdateTransactionRequest;
 import net.sternstein.saft.service.TransactionService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -42,7 +42,7 @@ public class TransactionRestApi implements TransactionApi {
             )})
     @Override
     public Response createTransaction(CreateTransactionRequest request) {
-        var transaction = transactionService.createTransaction(request.userId(), request.productId(), request.value(), request.amount());
+        var transaction = transactionService.createTransaction(request.userId());
         return Response.ok().entity(transaction).build();
     }
 
@@ -133,8 +133,8 @@ public class TransactionRestApi implements TransactionApi {
                     responseCode = "200"
             )})
     @Override
-    public Response purchase(PurchaseRequest request) {
-        var transaction = transactionService.purchase(request.userId(), request.productId(), request.value(), request.amount());
+    public Response executeTransaction(ExecuteTransactionRequest request) {
+        var transaction = transactionService.executeTransaction(request.userId(), request.purchaseDTOList());
         return Response.ok().entity(transaction).build();
     }
 
