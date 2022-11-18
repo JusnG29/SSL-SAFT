@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: openapi-artifact
-          path: .
+          path: openapi/saft
 
   build-frontend-image:
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: openapi-artifact
-          path: .
+          path: openapi/saft
 
       - name: Build and push
         uses: docker/build-push-action@v2
