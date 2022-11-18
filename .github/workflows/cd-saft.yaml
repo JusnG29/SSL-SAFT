@@ -30,6 +30,12 @@ jobs:
         working-directory: ./src/saft-backend
         run: ./gradlew build "-Dquarkus.profile=cd"
 
+      - name: Store openapi manifest
+        uses: actions/upload-artifact@master
+        with:
+          name: openapi-artifact
+          path: .
+
   build-frontend-image:
     runs-on: ubuntu-latest
     needs: [build-backend-image]
@@ -44,11 +50,17 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Load openapi manifest
+        uses: actions/download-artifact@master
+        with:
+          name: openapi-artifact
+          path: .
+
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: ./src/saft-personal-ui
-          file: ./src/saft-personal-ui/Dockerfile
+          file: ./src/saft-personal-ui/Dockerfile.remote
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/saft-ui:0.1.0
 
