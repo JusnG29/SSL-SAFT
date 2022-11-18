@@ -2,6 +2,8 @@
 
 Sternsteins-Accounting-Facilitation-Tool
 
+![-](https://github.com/JusnG29/SSL-SAFT/actions/workflows/cd-saft.yaml/badge.svg)
+
 ## Local development
 
 ### Prerequisites
