@@ -59,7 +59,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./src/saft-personal-ui
+          context: .
           file: ./src/saft-personal-ui/Dockerfile.remote
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/saft-ui:0.1.0
