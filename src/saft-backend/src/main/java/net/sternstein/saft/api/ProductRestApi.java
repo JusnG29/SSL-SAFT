@@ -1,9 +1,15 @@
 package net.sternstein.saft.api;
 
-import net.sternstein.saft.models.dtos.product.CreateProductRequest;
-import net.sternstein.saft.models.dtos.product.DeleteProductRequest;
-import net.sternstein.saft.models.dtos.product.UpdateProductRequest;
+import net.sternstein.saft.domain.Product;
+import net.sternstein.saft.model.dto.product.CreateProductRequest;
+import net.sternstein.saft.model.dto.product.UpdateProductRequest;
 import net.sternstein.saft.services.ProductService;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;

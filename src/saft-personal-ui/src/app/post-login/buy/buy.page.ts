@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
-import { Product, User } from '../../openapi-generated/models';
+import { Product, User } from '../../shared/openapi-generated/models';
 import { BasketService } from '../../shared/services/basket.service';
 import { ProductService } from '../../shared/services/product.service';
-import { TransactionService } from '../../shared/services/transaction.service';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class BuyPage implements OnInit, OnDestroy {
 
   constructor(
     private readonly productService: ProductService,
-    private readonly transactionService: TransactionService,
     private readonly userService: UserService,
     private readonly basketService: BasketService,
     private readonly navController: NavController
@@ -29,7 +27,7 @@ export class BuyPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadAllProducts();
     this.subscribeToBasketPrice();
-    this.user = this.userService.getAuthenticatedUser();
+    this.subscribeToUser();
   }
 
   ngOnDestroy(): void {
@@ -62,5 +60,12 @@ export class BuyPage implements OnInit, OnDestroy {
       .subscribe({
         next: (price) => (this.basketPrice = price),
       });
+  }
+
+  private subscribeToUser(): void {
+    this.userService
+      .getAuthenticatedUser$()
+      .pipe(takeUntil(this.$end))
+      .subscribe((user) => (this.user = user));
   }
 }

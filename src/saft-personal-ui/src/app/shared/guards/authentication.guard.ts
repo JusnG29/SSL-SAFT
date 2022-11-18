@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { from, Observable } from 'rxjs';
-import { User } from '../../openapi-generated/models';
+import { User } from '../openapi-generated/models';
 import { JwtService } from '../services/jwt.service';
 import { StorageService } from '../services/storage.service';
 import { UserService } from '../services/user.service';

@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
-import { User } from '../../../openapi-generated/models';
+import { User } from '../../openapi-generated/models';
 import { UserService } from '../../services/user.service';
 
 @Component({

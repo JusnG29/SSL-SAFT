@@ -2,11 +2,11 @@ package net.sternstein.saft.service;
 
 import io.quarkus.hibernate.orm.panache.Panache;
 import net.sternstein.saft.domain.Product;
-import net.sternstein.saft.domain.Transaction;
 import net.sternstein.saft.domain.User;
 import net.sternstein.saft.model.dto.transaction.PurchaseDTO;
 import net.sternstein.saft.persistence.ProductRepository;
 import net.sternstein.saft.persistence.UserRepository;
+import net.sternstein.saft.services.TransactionService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

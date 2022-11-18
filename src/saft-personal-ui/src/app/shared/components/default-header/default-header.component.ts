@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
+import { User } from '../../openapi-generated/models';
 
-import { User } from '../../../openapi-generated/models';
 import { UserService } from '../../services/user.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Product } from '../../../openapi-generated/models';
+import { Product } from '../../../shared/openapi-generated/models';
 
 @Component({
   selector: 'app-product-list-item',

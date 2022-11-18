@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Product } from '../../openapi-generated/models';
-import { ProductRestApiService } from '../../openapi-generated/services';
+import { Product } from '../openapi-generated/models';
+import { ProductRestApiService } from '../openapi-generated/services';
 
 @Injectable({
   providedIn: 'root',

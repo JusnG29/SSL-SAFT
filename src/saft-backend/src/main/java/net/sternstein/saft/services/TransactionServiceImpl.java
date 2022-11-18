@@ -8,6 +8,7 @@ import net.sternstein.saft.model.dto.transaction.PurchaseDTO;
 import net.sternstein.saft.persistence.PurchaseRepository;
 import net.sternstein.saft.persistence.TransactionRepository;
 import net.sternstein.saft.persistence.UserRepository;
+import net.sternstein.saft.service.PurchaseService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

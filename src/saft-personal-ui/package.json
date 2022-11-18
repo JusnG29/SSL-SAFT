@@ -10,8 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ng-openapi-gen": "ng-openapi-gen --input ./src/openapi/openapi-saft --output ./src/app/openapi-generated",
-    "ng-openapi-gen-remote": "ng-openapi-gen --input ./src/openapi/openapi-saft --output ./src/app/openapi-generated"
+    "ng-openapi-gen": "ng-openapi-gen --input ../saft-backend/target/generated/openapi.json --output ./src/app/shared/openapi-generated"
   },
   "private": true,
   "dependencies": {
