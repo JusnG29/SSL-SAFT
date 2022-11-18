@@ -1,7 +1,7 @@
 # build 1
 FROM node:latest as builder
 WORKDIR /app
-COPY . .
+COPY /src/saft-personal-ui .
 COPY /home/runner/work/SSL-SAFT/SSL-SAFT/openapi/saft openapi
 
 RUN npm install -g @ionic/cli@6.20.1 && npm install -g @angular/cli@14.1.0
