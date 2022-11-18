@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from '../../openapi-generated/models';
 import { ProductRestApiService } from '../../openapi-generated/services';
 

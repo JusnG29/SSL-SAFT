@@ -1,0 +1,20 @@
+<form class="flex items-center h-full" [formGroup]="countForm">
+  <button
+    class="bg-slate-700 w-10 h-10 rounded-full text-white"
+    (click)="decrementCount()"
+  >
+    -
+  </button>
+
+  <input
+    formControlName="count"
+    class="w-14 h-10 border-2 border-gray-200 rounded-md text-center ml-5 mr-5"
+    type="number"
+  />
+  <button
+    class="bg-slate-700 w-10 h-10 rounded-full text-white"
+    (click)="incrementCount()"
+  >
+    +
+  </button>
+</form>

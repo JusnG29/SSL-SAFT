@@ -1,0 +1,14 @@
+<div class="flex justify-between mb-3 p-1">
+  <div
+    [style]="'border-left: 6px solid' + product.colorCode"
+    class="flex flex-col product-border p-1 pl-3"
+  >
+    <span class="font-bold mb-1">{{ product.name }}</span>
+    <span
+      >{{ product.price | currency: "EUR" }} / {{ product.description }}</span
+    >
+  </div>
+  <app-product-counter
+    (countChange)="emitCountChange($event)"
+  ></app-product-counter>
+</div>

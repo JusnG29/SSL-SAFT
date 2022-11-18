@@ -6,9 +6,10 @@ import { BuyPageRoutingModule } from './buy-routing.module';
 import { BuyPage } from './buy.page';
 import { SharedModule } from '../../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
-import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ProductListItemComponent } from './product-list-item/product-list-item.component';
+import { ProductCounterComponent } from './product-counter/product-counter.component';
 
 @NgModule({
   imports: [
@@ -18,11 +19,10 @@ import { MatInputModule } from '@angular/material/input';
     BuyPageRoutingModule,
     MatButtonModule,
     SharedModule,
-    MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
   ],
-  declarations: [BuyPage],
+  declarations: [BuyPage, ProductListItemComponent, ProductCounterComponent],
 })
 export class BuyModule {}
