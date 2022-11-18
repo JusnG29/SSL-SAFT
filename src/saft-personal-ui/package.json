@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ng-openapi-gen": "ng-openapi-gen --input ../saft-backend/target/generated/openapi.json --output ./src/app/shared/openapi-generated",
-    "ng-openapi-gen:pipeline": "ng-openapi-gen --input /home/runner/work/SSL-SAFT/openapi/saft --output ./src/app/shared/openapi-generated"
+    "ng-openapi-gen:pipeline": "ng-openapi-gen --input openapi.json --output ./src/app/shared/openapi-generated"
   },
   "private": true,
   "dependencies": {
