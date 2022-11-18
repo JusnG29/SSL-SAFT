@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: openapi-artifact
-          path: openapi/saft
+          path: ./src/saft-backend/target/generated/openapi.json
 
   build-frontend-image:
     runs-on: ubuntu-latest
