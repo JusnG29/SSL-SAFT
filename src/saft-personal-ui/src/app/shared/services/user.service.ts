@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of, throwError } from 'rxjs';
-import { User } from '../../openapi-generated/models';
-import { UserRestApiService } from '../../openapi-generated/services';
+import { User } from '../openapi-generated/models';
+import { UserRestApiService } from '../openapi-generated/services';
 import { StorageService } from './storage.service';
 
 @Injectable({

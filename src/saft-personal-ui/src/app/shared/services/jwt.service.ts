@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../openapi-generated/models';
-import { UserRestApiService } from '../../openapi-generated/services';
+import { User } from '../openapi-generated/models';
 
 // TODO: Add "real" Jwt implementation
 @Injectable({

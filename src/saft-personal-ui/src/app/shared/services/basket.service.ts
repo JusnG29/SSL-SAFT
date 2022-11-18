@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Product } from '../../openapi-generated/models';
+import { Product } from '../openapi-generated/models';
 
 @Injectable({
   providedIn: 'root',

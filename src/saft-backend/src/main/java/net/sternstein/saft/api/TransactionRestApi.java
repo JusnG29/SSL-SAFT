@@ -1,10 +1,17 @@
 package net.sternstein.saft.api;
 
-import net.sternstein.saft.models.dtos.transaction.CreateTransactionRequest;
-import net.sternstein.saft.models.dtos.transaction.DeleteTransactionRequest;
-import net.sternstein.saft.models.dtos.transaction.GetTransactionRequest;
-import net.sternstein.saft.models.dtos.transaction.UpdateTransactionRequest;
+import net.sternstein.saft.domain.Transaction;
+import net.sternstein.saft.model.dto.transaction.ExecuteTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.GetUserHistoryRequest;
+import net.sternstein.saft.model.dto.transaction.CreateTransactionRequest;
+import net.sternstein.saft.model.dto.transaction.UpdateTransactionRequest;
 import net.sternstein.saft.services.TransactionService;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;

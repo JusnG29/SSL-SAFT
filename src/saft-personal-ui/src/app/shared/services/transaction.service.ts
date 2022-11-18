@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
-import {
-  Product,
-  PurchaseDto,
-  Transaction,
-} from '../../openapi-generated/models';
-import { TransactionRestApiService } from '../../openapi-generated/services';
+import { Product, PurchaseDto, Transaction } from '../openapi-generated/models';
+import { TransactionRestApiService } from '../openapi-generated/services';
 
 @Injectable({
   providedIn: 'root',

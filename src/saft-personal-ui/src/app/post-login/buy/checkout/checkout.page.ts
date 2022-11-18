@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
-import { Product, User } from '../../../openapi-generated/models';
+import { Product, User } from '../../../shared/openapi-generated/models';
 import { BasketService } from '../../../shared/services/basket.service';
 import { TransactionService } from '../../../shared/services/transaction.service';
 import { UserService } from '../../../shared/services/user.service';

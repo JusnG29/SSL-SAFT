@@ -36,3 +36,4 @@ nb-configuration.xml
 .env
 
 !/gradle/wrapper/gradle-wrapper.jar
+target
