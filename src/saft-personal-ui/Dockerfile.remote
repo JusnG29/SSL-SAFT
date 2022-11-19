@@ -10,4 +10,5 @@ RUN ionic build --prod --minifyjs --minifycss --optimizejs
 
 # Deploy into nginx
 FROM nginx:alpine
+COPY /src/saft-personal-ui/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder app/www /usr/share/nginx/html
