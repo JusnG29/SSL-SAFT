@@ -74,7 +74,11 @@ public class TransactionServiceImpl implements TransactionService {
         user.setBalance(newBalance);
 
         Panache.getEntityManager().merge(user);
-        return Panache.getEntityManager().merge(transaction);
+
+        // TODO: @Jusn Hacky way to get purchase list as well
+        var fullTransaction = Panache.getEntityManager().merge(transaction);
+        fullTransaction.setPurchaseList(purchaseList);
+        return fullTransaction;
     }
 
     @Override
