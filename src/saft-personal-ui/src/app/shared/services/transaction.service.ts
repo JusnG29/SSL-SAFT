@@ -32,7 +32,10 @@ export class TransactionService {
       .executeTransaction$Response({
         body: { userId: userId, purchaseDTOList: purchases },
       })
-      .pipe(map((value) => value.body));
+      .pipe(
+        map((value) => value.body),
+        tap((transaction) => this.addTransaction(transaction))
+      );
   }
 
   public loadTransactions(userId: string): void {
@@ -50,5 +53,9 @@ export class TransactionService {
 
   public getUserHistory$(): Observable<Transaction[]> {
     return this.transactions$.asObservable();
+  }
+
+  private addTransaction(transaction: Transaction): void {
+    this.transactions$.next([transaction, ...this.transactions$.value]);
   }
 }

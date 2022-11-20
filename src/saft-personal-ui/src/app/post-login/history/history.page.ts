@@ -21,18 +21,12 @@ export class HistoryPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeToUser();
-
-    // if (user) {
-    //   this.transactionService
-    //     .getUserHistory$()
-    //     .pipe(takeUntil(this.$end))
-    //     .subscribe({ next: (transactions) => (this.history = transactions) });
-    //   this.transactionService.loadTransactions(user.id);
-    // }
+    this.subscribeToTransactions();
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.$end.next();
+    this.$end.complete();
   }
 
   private subscribeToUser(): void {
@@ -40,5 +34,14 @@ export class HistoryPage implements OnInit, OnDestroy {
       .getAuthenticatedUser$()
       .pipe(takeUntil(this.$end))
       .subscribe((user) => (this.user = user));
+  }
+
+  private subscribeToTransactions(): void {
+    this.transactionService
+      .getUserHistory$()
+      .pipe(takeUntil(this.$end))
+      .subscribe((history) => (this.history = history));
+
+    this.transactionService.loadTransactions(this.user.id);
   }
 }

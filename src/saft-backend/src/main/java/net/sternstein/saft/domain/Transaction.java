@@ -60,6 +60,10 @@ public class Transaction {
         this.purchaseDate = purchaseDate;
     }
 
+    public void setPurchaseList(List<Purchase> purchaseList) {
+        this.purchaseList = purchaseList;
+    }
+
     public BigDecimal getTotalValue() {
         return totalValue;
     }
