@@ -1,14 +1,14 @@
 <app-default-header></app-default-header>
+<div
+  class="w-full top-14 flex justify-between p-3 px-7 bg-slate-200 font-bold z-50"
+>
+  Kontostand:
+  <span>{{user?.balance | currency: 'EUR'}}</span>
+</div>
 
-<ion-content fullscreen="true">
+<ion-content>
   <section>
-    <div
-      class="fixed w-full top-14 flex justify-between p-3 px-7 bg-slate-200 font-bold z-50"
-    >
-      Kontostand:
-      <span>{{user?.balance | currency: 'EUR'}}</span>
-    </div>
-    <div class="flex justify-between flex-col mt-10">
+    <div class="flex justify-between flex-col">
       <ion-list class="m-2" lines="none">
         <div
           *ngFor="let product of allProducts"
@@ -24,17 +24,17 @@
         </div>
       </ion-list>
     </div>
-    <div
-      class="fixed bottom-0 bg-slate-300 bg-opacity-80 w-full flex justify-center p-3"
-      [hidden]="basketPrice <= 0"
-    >
-      <button
-        class="bg-slate-600 py-3 px-11 rounded-sm text-white flex"
-        (click)="initializePurchase()"
-      >
-        Artikel um {{basketPrice | currency:'EUR'}} kaufen
-        <ion-icon class="text-base ml-1" icon="checkmark-circle"></ion-icon>
-      </button>
-    </div>
   </section>
 </ion-content>
+<div
+  class="bg-slate-300 bg-opacity-80 w-full flex justify-center p-3 z-50"
+  [hidden]="basketPrice <= 0"
+>
+  <button
+    class="bg-slate-600 py-3 px-11 rounded-sm text-white flex"
+    (click)="initializePurchase()"
+  >
+    Artikel um {{basketPrice | currency:'EUR'}} kaufen
+    <ion-icon class="text-base ml-1" icon="checkmark-circle"></ion-icon>
+  </button>
+</div>
