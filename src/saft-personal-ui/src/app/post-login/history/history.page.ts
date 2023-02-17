@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Transaction, User } from '../../shared/openapi-generated/models';
 import { TransactionService } from '../../shared/services/transaction.service';
 import { UserService } from '../../shared/services/user.service';
+import { faCrown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-history',
@@ -12,6 +13,9 @@ import { UserService } from '../../shared/services/user.service';
 export class HistoryPage implements OnInit, OnDestroy {
   public user: User;
   public history: Transaction[] = [];
+
+  public faCrown = faCrown;
+
   private $end: Subject<void> = new Subject();
 
   constructor(

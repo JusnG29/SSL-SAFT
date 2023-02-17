@@ -7,11 +7,13 @@ import { HistoryPage } from './history.page';
 import { HistoryRoutingModule } from './history-routing.module';
 import { MatCardModule } from '@angular/material/card';
 import { SharedModule } from '../../shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
+    FontAwesomeModule,
     FormsModule,
     HistoryRoutingModule,
     MatCardModule,

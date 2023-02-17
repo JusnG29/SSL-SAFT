@@ -10,6 +10,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { IonicModule } from '@ionic/angular';
 import { DefaultHeaderComponent } from './components/default-header/default-header.component';
 import { HistoryBaseComponent } from './components/history-base/history-base.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HistoryBaseComponent } from './components/history-base/history-base.com
     MatInputModule,
     MatButtonModule,
     IonicModule.forRoot(),
+    FontAwesomeModule,
   ],
   exports: [
     MatCardModule,

@@ -5,9 +5,16 @@ import { BalanceRoutingModule } from './balance-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { BalancePage } from './balance.page';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [BalancePage],
-  imports: [CommonModule, BalanceRoutingModule, IonicModule, SharedModule],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    BalanceRoutingModule,
+    IonicModule,
+    SharedModule,
+  ],
 })
 export class BalanceModule {}

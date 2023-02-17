@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { Transaction, User } from '../../shared/openapi-generated/models';
 import { TransactionService } from '../../shared/services/transaction.service';
@@ -14,6 +16,9 @@ export class BalancePage implements OnInit {
   public user: User;
   public balanceState: BalanceState;
   public userHistory: Transaction[] = [];
+
+  private faThumbsUp = faThumbsUp;
+  private faThumbsDown = faThumbsDown;
 
   private $end: Subject<void> = new Subject();
 
@@ -37,8 +42,8 @@ export class BalancePage implements OnInit {
       });
   }
 
-  public getBadgeIcon(): string {
-    return this.balanceState === BalanceState.OK ? 'thumbs-up' : 'thumbs-down';
+  public getBadgeIcon(): IconDefinition {
+    return this.balanceState === BalanceState.OK ? faThumbsUp : faThumbsDown;
   }
 
   public getBadgeDescription(): string {

@@ -2,7 +2,7 @@
 
 <ion-content>
   <app-history-base [badgeDescription]="getBadgeDescription()">
-    <ion-icon icon-content [icon]="getBadgeIcon()" class="text-3xl"></ion-icon>
+    <fa-icon class="text-3xl" icon-content [icon]="getBadgeIcon()"></fa-icon>
 
     <h1 class="flex justify-between">
       Kontostand:<span>{{user.balance | currency: 'EUR'}}</span>

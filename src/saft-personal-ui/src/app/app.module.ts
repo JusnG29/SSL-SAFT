@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { ApiModule } from './shared/openapi-generated/api.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { ApiModule } from './shared/openapi-generated/api.module';
     HttpClientModule,
     ApiModule.forRoot({ rootUrl: environment.saftBackendUrl }),
     IonicStorageModule.forRoot(),
+    FontAwesomeModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
