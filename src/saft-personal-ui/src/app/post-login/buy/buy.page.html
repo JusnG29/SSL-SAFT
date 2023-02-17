@@ -1,11 +1,9 @@
-<app-default-header></app-default-header>
-<div
-  class="w-full top-14 flex justify-between p-3 px-7 bg-slate-200 font-bold z-50"
->
-  Kontostand:
-  <span>{{user?.balance | currency: 'EUR'}}</span>
-</div>
-
+<app-default-header>
+  <div class="w-full flex justify-between p-3 px-7 bg-slate-200 font-bold z-50">
+    Kontostand:
+    <span>{{user?.balance | currency: 'EUR'}}</span>
+  </div>
+</app-default-header>
 <ion-content>
   <section>
     <div class="flex justify-between flex-col">

@@ -45,7 +45,7 @@ export class UserService {
   }
 
   public logout(): void {
-    this.authenticatedUser = undefined;
+    this.authenticatedUser.next(undefined);
     this.storageService.clearUserJwt();
   }
 
