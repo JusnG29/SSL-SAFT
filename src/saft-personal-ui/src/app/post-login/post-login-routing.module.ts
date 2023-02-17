@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckoutPage } from './buy/checkout/checkout.page';
 import { PostLoginPage } from './post-login.page';
 
 const routes: Routes = [
@@ -16,6 +15,11 @@ const routes: Routes = [
         path: 'history',
         loadChildren: () =>
           import('./history/history.module').then((m) => m.HistoryModule),
+      },
+      {
+        path: 'balance',
+        loadChildren: () =>
+          import('./balance/balance.module').then((m) => m.BalanceModule),
       },
       {
         path: '',
