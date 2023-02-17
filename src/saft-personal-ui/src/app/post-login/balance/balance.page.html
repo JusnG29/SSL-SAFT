@@ -7,35 +7,18 @@
     <h1 class="flex justify-between">
       Kontostand:<span>{{user.balance | currency: 'EUR'}}</span>
     </h1>
-    <div *ngFor="let transaction of userHistory" class="list-element">
-      <div>dies das</div>
-    </div>
-    <!-- <h1>Bisherige Käufe</h1>
 
-    <div *ngFor="let transaction of history; let i = index">
+    <div
+      *ngFor="let transaction of userHistory"
+      class="flex justify-between mb-5"
+    >
       <div class="flex flex-col">
-        <span class="mb-3"
-          >{{transaction.purchaseDate | date:'dd.MM.YYYY (HH:mm'}} Uhr)
-        </span>
-
-        <div
-          *ngFor="let purchase of transaction.purchaseList"
-          class="flex justify-between"
+        <span>{{transaction.totalValue > 0 ? "Kauf" : "Einzahlung"}}</span>
+        <span
+          >{{transaction.purchaseDate | date:'dd.MM.YYYY (HH:mm'}} Uhr)</span
         >
-          <span>
-            {{purchase.amount}} x {{purchase.product.name}}
-            {{purchase.product.description}}
-          </span>
-          <span>{{purchase.amount * purchase.value | currency:'EUR'}} </span>
-        </div>
-        <div class="flex justify-between">
-          <span class="font-bold">Gesamt</span>
-          <span class="font-bold"
-            >{{transaction.totalValue | currency:'EUR'}}</span
-          >
-        </div>
-        <span class="item-divider" *ngIf="i < history.length - 1"></span>
       </div>
-    </div> -->
+      {{- transaction.totalValue | currency:'EUR'}}
+    </div>
   </app-history-base>
 </ion-content>

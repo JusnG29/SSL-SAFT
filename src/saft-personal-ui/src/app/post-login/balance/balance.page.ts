@@ -60,8 +60,9 @@ export class BalancePage implements OnInit {
       .getUserHistory$()
       .pipe(takeUntil(this.$end))
       .subscribe((history) => {
-        console.log(history);
         this.userHistory = history;
       });
+
+    this.transactionService.loadTransactions(this.user.id);
   }
 }

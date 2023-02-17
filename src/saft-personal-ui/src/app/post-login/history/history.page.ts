@@ -40,7 +40,9 @@ export class HistoryPage implements OnInit, OnDestroy {
     this.transactionService
       .getUserHistory$()
       .pipe(takeUntil(this.$end))
-      .subscribe((history) => (this.history = history));
+      .subscribe(
+        (history) => (this.history = history.filter((t) => t.totalValue > 0))
+      );
 
     this.transactionService.loadTransactions(this.user.id);
   }

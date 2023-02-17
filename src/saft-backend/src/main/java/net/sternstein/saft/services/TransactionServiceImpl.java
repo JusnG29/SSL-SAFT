@@ -1,6 +1,7 @@
 package net.sternstein.saft.services;
 
 import io.quarkus.hibernate.orm.panache.Panache;
+import io.quarkus.panache.common.Sort;
 import net.sternstein.saft.domain.Purchase;
 import net.sternstein.saft.domain.Transaction;
 import net.sternstein.saft.domain.User;
@@ -45,7 +46,9 @@ public class TransactionServiceImpl implements TransactionService {
 
         var transaction = new Transaction(user);
         transaction.setPurchaseDate(Instant.now());
-        transaction.setTotalValue(amount);
+
+        // negate the value to actually add money
+        transaction.setTotalValue(amount.negate());
         transactionRepository.persist(transaction);
 
         return transaction;
