@@ -4,7 +4,7 @@
   <div
     class="flex w-20 h-20 justify-center items-center bg-slate-300 rounded-full"
   >
-    <ion-icon icon="beer" class="text-3xl"></ion-icon>
+    <ng-content select="[icon-content]"></ng-content>
   </div>
   <span class="font-bold mt-5">{{ badgeDescription }}</span>
 </section>

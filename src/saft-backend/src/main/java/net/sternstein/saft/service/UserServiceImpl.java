@@ -2,6 +2,7 @@ package net.sternstein.saft.service;
 
 import io.quarkus.hibernate.orm.panache.Panache;
 import net.sternstein.saft.domain.Product;
+import net.sternstein.saft.domain.Transaction;
 import net.sternstein.saft.domain.User;
 import net.sternstein.saft.model.dto.transaction.PurchaseDTO;
 import net.sternstein.saft.persistence.ProductRepository;
@@ -83,7 +84,6 @@ public class UserServiceImpl implements UserService {
         Product schoko = new Product("Schoko", BigDecimal.valueOf(0.7), "#2ba6c2", "1 Stk.");
         Product something = new Product("Product X", BigDecimal.valueOf(0.1), "#000000", "1 Stk.");
 
-
         userRepository.persist(odin);
         userRepository.persist(sky);
         productRepository.persist(seiterl);
@@ -104,5 +104,8 @@ public class UserServiceImpl implements UserService {
 
         transactionService.executeTransaction(odin.getId(), purchaseOdin);
         transactionService.executeTransaction(sky.getId(), purchaseSky);
+
+        transactionService.createDepositTransaction(sky.getId(), BigDecimal.valueOf(100));
+        transactionService.createDepositTransaction(odin.getId(), BigDecimal.valueOf(50));
     }
 }

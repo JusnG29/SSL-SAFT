@@ -1,8 +1,15 @@
 <app-default-header></app-default-header>
 
 <ion-content>
-  <app-history-base badgeDescription="Du bist zurzeit Bierbaron">
-    Dies dass
+  <app-history-base [badgeDescription]="getBadgeDescription()">
+    <ion-icon icon-content [icon]="getBadgeIcon()" class="text-3xl"></ion-icon>
+
+    <h1 class="flex justify-between">
+      Kontostand:<span>{{user.balance | currency: 'EUR'}}</span>
+    </h1>
+    <div *ngFor="let transaction of userHistory" class="list-element">
+      <div>dies das</div>
+    </div>
     <!-- <h1>Bisherige Käufe</h1>
 
     <div *ngFor="let transaction of history; let i = index">

@@ -13,6 +13,7 @@ import net.sternstein.saft.service.PurchaseService;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +34,18 @@ public class TransactionServiceImpl implements TransactionService {
         var user = userRepository.findById(userId);
         var transaction = new Transaction(user);
 
+        transactionRepository.persist(transaction);
+
+        return transaction;
+    }
+
+    @Override
+    public Transaction createDepositTransaction(UUID userId, BigDecimal amount) {
+        var user = userRepository.findById(userId);
+
+        var transaction = new Transaction(user);
+        transaction.setPurchaseDate(Instant.now());
+        transaction.setTotalValue(amount);
         transactionRepository.persist(transaction);
 
         return transaction;
